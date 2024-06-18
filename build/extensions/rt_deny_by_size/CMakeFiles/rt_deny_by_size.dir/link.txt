@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../rt_deny_by_size.fdx CMakeFiles/rt_deny_by_size.dir/rt_deny_by_size.c.o CMakeFiles/rt_deny_by_size.dir/lex.rt_deny_by_size_conf.c.o CMakeFiles/rt_deny_by_size.dir/rt_deny_by_size_conf.tab.c.o 

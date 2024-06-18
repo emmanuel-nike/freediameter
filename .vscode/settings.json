@@ -1,0 +1,7 @@
+{
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "*.htm": "htm",
+        "extension.h": "c"
+    }
+}

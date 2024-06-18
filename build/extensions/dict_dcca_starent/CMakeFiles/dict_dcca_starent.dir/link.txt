@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../dict_dcca_starent.fdx CMakeFiles/dict_dcca_starent.dir/dict_dcca_starent.c.o CMakeFiles/dict_dcca_starent.dir/add_avps.c.o 

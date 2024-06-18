@@ -1,0 +1,1 @@
+/usr/bin/gcc -Wall -g -O0  -rdynamic CMakeFiles/testcnx.dir/testcnx.c.o  -o testcnx  -Wl,-rpath,/home/billing/freeDiameter/build/libfdcore:/home/billing/freeDiameter/build/libfdproto ../libfdcore/libfdcore.so.1.5.0 -lgnutls -lgcrypt ../libfdproto/libfdproto.so.1.5.0 -lpthread -lidn2 -ldl -lsctp -lgnutls -lgcrypt 

@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../rt_rewrite.fdx CMakeFiles/rt_rewrite.dir/rt_rewrite.c.o CMakeFiles/rt_rewrite.dir/lex.rt_rewrite_conf.c.o CMakeFiles/rt_rewrite.dir/rt_rewrite_conf.tab.c.o 

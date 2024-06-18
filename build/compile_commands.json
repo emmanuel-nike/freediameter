@@ -1,0 +1,522 @@
+[
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/dictionary.c.o   -c /home/billing/freeDiameter/libfdproto/dictionary.c",
+  "file": "/home/billing/freeDiameter/libfdproto/dictionary.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/dictionary_functions.c.o   -c /home/billing/freeDiameter/libfdproto/dictionary_functions.c",
+  "file": "/home/billing/freeDiameter/libfdproto/dictionary_functions.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/dispatch.c.o   -c /home/billing/freeDiameter/libfdproto/dispatch.c",
+  "file": "/home/billing/freeDiameter/libfdproto/dispatch.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/fifo.c.o   -c /home/billing/freeDiameter/libfdproto/fifo.c",
+  "file": "/home/billing/freeDiameter/libfdproto/fifo.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/init.c.o   -c /home/billing/freeDiameter/libfdproto/init.c",
+  "file": "/home/billing/freeDiameter/libfdproto/init.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/lists.c.o   -c /home/billing/freeDiameter/libfdproto/lists.c",
+  "file": "/home/billing/freeDiameter/libfdproto/lists.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/log.c.o   -c /home/billing/freeDiameter/libfdproto/log.c",
+  "file": "/home/billing/freeDiameter/libfdproto/log.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/messages.c.o   -c /home/billing/freeDiameter/libfdproto/messages.c",
+  "file": "/home/billing/freeDiameter/libfdproto/messages.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/ostr.c.o   -c /home/billing/freeDiameter/libfdproto/ostr.c",
+  "file": "/home/billing/freeDiameter/libfdproto/ostr.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/portability.c.o   -c /home/billing/freeDiameter/libfdproto/portability.c",
+  "file": "/home/billing/freeDiameter/libfdproto/portability.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/rt_data.c.o   -c /home/billing/freeDiameter/libfdproto/rt_data.c",
+  "file": "/home/billing/freeDiameter/libfdproto/rt_data.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/sessions.c.o   -c /home/billing/freeDiameter/libfdproto/sessions.c",
+  "file": "/home/billing/freeDiameter/libfdproto/sessions.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/utils.c.o   -c /home/billing/freeDiameter/libfdproto/utils.c",
+  "file": "/home/billing/freeDiameter/libfdproto/utils.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdproto",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdproto_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/a/b/c  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdproto.dir/version.c.o   -c /home/billing/freeDiameter/libfdproto/version.c",
+  "file": "/home/billing/freeDiameter/libfdproto/version.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/apps.c.o   -c /home/billing/freeDiameter/libfdcore/apps.c",
+  "file": "/home/billing/freeDiameter/libfdcore/apps.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/config.c.o   -c /home/billing/freeDiameter/libfdcore/config.c",
+  "file": "/home/billing/freeDiameter/libfdcore/config.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/core.c.o   -c /home/billing/freeDiameter/libfdcore/core.c",
+  "file": "/home/billing/freeDiameter/libfdcore/core.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/cnxctx.c.o   -c /home/billing/freeDiameter/libfdcore/cnxctx.c",
+  "file": "/home/billing/freeDiameter/libfdcore/cnxctx.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/endpoints.c.o   -c /home/billing/freeDiameter/libfdcore/endpoints.c",
+  "file": "/home/billing/freeDiameter/libfdcore/endpoints.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/events.c.o   -c /home/billing/freeDiameter/libfdcore/events.c",
+  "file": "/home/billing/freeDiameter/libfdcore/events.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/extensions.c.o   -c /home/billing/freeDiameter/libfdcore/extensions.c",
+  "file": "/home/billing/freeDiameter/libfdcore/extensions.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/fifo_stats.c.o   -c /home/billing/freeDiameter/libfdcore/fifo_stats.c",
+  "file": "/home/billing/freeDiameter/libfdcore/fifo_stats.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/hooks.c.o   -c /home/billing/freeDiameter/libfdcore/hooks.c",
+  "file": "/home/billing/freeDiameter/libfdcore/hooks.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/dict_base_proto.c.o   -c /home/billing/freeDiameter/libfdcore/dict_base_proto.c",
+  "file": "/home/billing/freeDiameter/libfdcore/dict_base_proto.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/messages.c.o   -c /home/billing/freeDiameter/libfdcore/messages.c",
+  "file": "/home/billing/freeDiameter/libfdcore/messages.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/queues.c.o   -c /home/billing/freeDiameter/libfdcore/queues.c",
+  "file": "/home/billing/freeDiameter/libfdcore/queues.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/peers.c.o   -c /home/billing/freeDiameter/libfdcore/peers.c",
+  "file": "/home/billing/freeDiameter/libfdcore/peers.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_ce.c.o   -c /home/billing/freeDiameter/libfdcore/p_ce.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_ce.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_cnx.c.o   -c /home/billing/freeDiameter/libfdcore/p_cnx.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_cnx.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_dw.c.o   -c /home/billing/freeDiameter/libfdcore/p_dw.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_dw.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_dp.c.o   -c /home/billing/freeDiameter/libfdcore/p_dp.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_dp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_expiry.c.o   -c /home/billing/freeDiameter/libfdcore/p_expiry.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_expiry.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_out.c.o   -c /home/billing/freeDiameter/libfdcore/p_out.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_out.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_psm.c.o   -c /home/billing/freeDiameter/libfdcore/p_psm.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_psm.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/p_sr.c.o   -c /home/billing/freeDiameter/libfdcore/p_sr.c",
+  "file": "/home/billing/freeDiameter/libfdcore/p_sr.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/routing_dispatch.c.o   -c /home/billing/freeDiameter/libfdcore/routing_dispatch.c",
+  "file": "/home/billing/freeDiameter/libfdcore/routing_dispatch.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/server.c.o   -c /home/billing/freeDiameter/libfdcore/server.c",
+  "file": "/home/billing/freeDiameter/libfdcore/server.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/tcp.c.o   -c /home/billing/freeDiameter/libfdcore/tcp.c",
+  "file": "/home/billing/freeDiameter/libfdcore/tcp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/version.c.o   -c /home/billing/freeDiameter/libfdcore/version.c",
+  "file": "/home/billing/freeDiameter/libfdcore/version.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/sctp.c.o   -c /home/billing/freeDiameter/libfdcore/sctp.c",
+  "file": "/home/billing/freeDiameter/libfdcore/sctp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -o CMakeFiles/libfdcore.dir/sctp3436.c.o   -c /home/billing/freeDiameter/libfdcore/sctp3436.c",
+  "file": "/home/billing/freeDiameter/libfdcore/sctp3436.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -I /home/billing/freeDiameter/libfdcore -o CMakeFiles/libfdcore.dir/lex.fdd.c.o   -c /home/billing/freeDiameter/build/libfdcore/lex.fdd.c",
+  "file": "/home/billing/freeDiameter/build/libfdcore/lex.fdd.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/libfdcore",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dlibfdcore_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/libfdcore  -Wall -g -O0 -fPIC   -I /home/billing/freeDiameter/libfdcore -o CMakeFiles/libfdcore.dir/fdd.tab.c.o   -c /home/billing/freeDiameter/build/libfdcore/fdd.tab.c",
+  "file": "/home/billing/freeDiameter/build/libfdcore/fdd.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/freeDiameterd",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0   -o CMakeFiles/freeDiameterd.dir/main.c.o   -c /home/billing/freeDiameter/freeDiameterd/main.c",
+  "file": "/home/billing/freeDiameter/freeDiameterd/main.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testsctp.dir/testsctp.c.o   -c /home/billing/freeDiameter/tests/testsctp.c",
+  "file": "/home/billing/freeDiameter/tests/testsctp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testdict.dir/testdict.c.o   -c /home/billing/freeDiameter/tests/testdict.c",
+  "file": "/home/billing/freeDiameter/tests/testdict.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testmesg_stress.dir/testmesg_stress.c.o   -c /home/billing/freeDiameter/tests/testmesg_stress.c",
+  "file": "/home/billing/freeDiameter/tests/testmesg_stress.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testpeers.dir/testpeers.c.o   -c /home/billing/freeDiameter/tests/testpeers.c",
+  "file": "/home/billing/freeDiameter/tests/testpeers.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testsess.dir/testsess.c.o   -c /home/billing/freeDiameter/tests/testsess.c",
+  "file": "/home/billing/freeDiameter/tests/testsess.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testdisp.dir/testdisp.c.o   -c /home/billing/freeDiameter/tests/testdisp.c",
+  "file": "/home/billing/freeDiameter/tests/testdisp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testcnx.dir/testcnx.c.o   -c /home/billing/freeDiameter/tests/testcnx.c",
+  "file": "/home/billing/freeDiameter/tests/testcnx.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testfifo.dir/testfifo.c.o   -c /home/billing/freeDiameter/tests/testfifo.c",
+  "file": "/home/billing/freeDiameter/tests/testfifo.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testostr.dir/testostr.c.o   -c /home/billing/freeDiameter/tests/testostr.c",
+  "file": "/home/billing/freeDiameter/tests/testostr.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testmesg.dir/testmesg.c.o   -c /home/billing/freeDiameter/tests/testmesg.c",
+  "file": "/home/billing/freeDiameter/tests/testmesg.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/tests",
+  "command": "/usr/bin/gcc -DBUILD_DIR=\\\"/home/billing/freeDiameter/build\\\" -DTEST_DEBUG -D_GNU_SOURCE -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/tests/../libfdproto -I/home/billing/freeDiameter/tests/../libfdcore  -Wall -g -O0   -o CMakeFiles/testloadext.dir/testloadext.c.o   -c /home/billing/freeDiameter/tests/testloadext.c",
+  "file": "/home/billing/freeDiameter/tests/testloadext.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_nasreq",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_nasreq_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_nasreq.dir/dict_nasreq.c.o   -c /home/billing/freeDiameter/extensions/dict_nasreq/dict_nasreq.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_nasreq/dict_nasreq.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_eap",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_eap_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_eap.dir/dict_eap.c.o   -c /home/billing/freeDiameter/extensions/dict_eap/dict_eap.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_eap/dict_eap.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_dcca",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_dcca_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_dcca.dir/dict_dcca.c.o   -c /home/billing/freeDiameter/extensions/dict_dcca/dict_dcca.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_dcca/dict_dcca.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_dcca_3gpp",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_dcca_3gpp_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_dcca_3gpp.dir/dict_dcca_3gpp.c.o   -c /home/billing/freeDiameter/extensions/dict_dcca_3gpp/dict_dcca_3gpp.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_dcca_3gpp/dict_dcca_3gpp.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_dcca_3gpp",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_dcca_3gpp_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_dcca_3gpp.dir/add_avps.c.o   -c /home/billing/freeDiameter/extensions/dict_dcca_3gpp/add_avps.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_dcca_3gpp/add_avps.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_dcca_starent",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_dcca_starent_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_dcca_starent.dir/dict_dcca_starent.c.o   -c /home/billing/freeDiameter/extensions/dict_dcca_starent/dict_dcca_starent.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_dcca_starent/dict_dcca_starent.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_dcca_starent",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_dcca_starent_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_dcca_starent.dir/add_avps.c.o   -c /home/billing/freeDiameter/extensions/dict_dcca_starent/add_avps.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_dcca_starent/add_avps.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dict_sip",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddict_sip_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dict_sip.dir/dict_sip.c.o   -c /home/billing/freeDiameter/extensions/dict_sip/dict_sip.c",
+  "file": "/home/billing/freeDiameter/extensions/dict_sip/dict_sip.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/lex.ta_conf.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/lex.ta_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/app_lte/lex.ta_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/ta_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/ta_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/app_lte/ta_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/ta_dict.c.o   -c /home/billing/freeDiameter/extensions/app_lte/ta_dict.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/ta_dict.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/ta_serv.c.o   -c /home/billing/freeDiameter/extensions/app_lte/ta_serv.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/ta_serv.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte_mysql.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte_mysql.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte_mysql.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_busypeers",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_busypeers_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_busypeers  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_busypeers.dir/rtbusy.c.o   -c /home/billing/freeDiameter/extensions/rt_busypeers/rtbusy.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_busypeers/rtbusy.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_busypeers",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_busypeers_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_busypeers  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_busypeers -o CMakeFiles/rt_busypeers.dir/lex.rtbusy_conf.c.o   -c /home/billing/freeDiameter/build/extensions/rt_busypeers/lex.rtbusy_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_busypeers/lex.rtbusy_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_busypeers",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_busypeers_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_busypeers  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_busypeers -o CMakeFiles/rt_busypeers.dir/rtbusy_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/rt_busypeers/rtbusy_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_busypeers/rtbusy_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_default",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_default_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_default  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_default.dir/rt_default.c.o   -c /home/billing/freeDiameter/extensions/rt_default/rt_default.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_default/rt_default.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_default",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_default_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_default  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_default -o CMakeFiles/rt_default.dir/lex.rtd_conf.c.o   -c /home/billing/freeDiameter/build/extensions/rt_default/lex.rtd_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_default/lex.rtd_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_default",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_default_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_default  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_default -o CMakeFiles/rt_default.dir/rtd_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/rt_default/rtd_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_default/rtd_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_default",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_default_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_default  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_default.dir/rtd_rules.c.o   -c /home/billing/freeDiameter/extensions/rt_default/rtd_rules.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_default/rtd_rules.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_deny_by_size",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_deny_by_size_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_deny_by_size  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_deny_by_size.dir/rt_deny_by_size.c.o   -c /home/billing/freeDiameter/extensions/rt_deny_by_size/rt_deny_by_size.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_deny_by_size/rt_deny_by_size.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_deny_by_size",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_deny_by_size_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_deny_by_size  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_deny_by_size -o CMakeFiles/rt_deny_by_size.dir/lex.rt_deny_by_size_conf.c.o   -c /home/billing/freeDiameter/build/extensions/rt_deny_by_size/lex.rt_deny_by_size_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_deny_by_size/lex.rt_deny_by_size_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_deny_by_size",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_deny_by_size_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_deny_by_size  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_deny_by_size -o CMakeFiles/rt_deny_by_size.dir/rt_deny_by_size_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/rt_deny_by_size/rt_deny_by_size_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_deny_by_size/rt_deny_by_size_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_ignore_dh",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_ignore_dh_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_ignore_dh  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_ignore_dh.dir/rt_ignore_dh.c.o   -c /home/billing/freeDiameter/extensions/rt_ignore_dh/rt_ignore_dh.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_ignore_dh/rt_ignore_dh.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_load_balance",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_load_balance_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_load_balance  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_load_balance.dir/rt_load_balance.c.o   -c /home/billing/freeDiameter/extensions/rt_load_balance/rt_load_balance.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_load_balance/rt_load_balance.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_randomize",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_randomize_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_randomize  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_randomize.dir/rt_randomize.c.o   -c /home/billing/freeDiameter/extensions/rt_randomize/rt_randomize.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_randomize/rt_randomize.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_redirect",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_redirect_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_redirect.dir/rt_redir.c.o   -c /home/billing/freeDiameter/extensions/rt_redirect/rt_redir.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_redirect/rt_redir.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_redirect",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_redirect_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_redirect.dir/redir_entries.c.o   -c /home/billing/freeDiameter/extensions/rt_redirect/redir_entries.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_redirect/redir_entries.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_redirect",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_redirect_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_redirect.dir/redir_expiry.c.o   -c /home/billing/freeDiameter/extensions/rt_redirect/redir_expiry.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_redirect/redir_expiry.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_redirect",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_redirect_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_redirect.dir/redir_fwd.c.o   -c /home/billing/freeDiameter/extensions/rt_redirect/redir_fwd.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_redirect/redir_fwd.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_redirect",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_redirect_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_redirect.dir/redir_out.c.o   -c /home/billing/freeDiameter/extensions/rt_redirect/redir_out.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_redirect/redir_out.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_rewrite",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_rewrite_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_rewrite  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/rt_rewrite.dir/rt_rewrite.c.o   -c /home/billing/freeDiameter/extensions/rt_rewrite/rt_rewrite.c",
+  "file": "/home/billing/freeDiameter/extensions/rt_rewrite/rt_rewrite.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_rewrite",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_rewrite_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_rewrite  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_rewrite -o CMakeFiles/rt_rewrite.dir/lex.rt_rewrite_conf.c.o   -c /home/billing/freeDiameter/build/extensions/rt_rewrite/lex.rt_rewrite_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_rewrite/lex.rt_rewrite_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/rt_rewrite",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Drt_rewrite_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/rt_rewrite  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/rt_rewrite -o CMakeFiles/rt_rewrite.dir/rt_rewrite_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/rt_rewrite/rt_rewrite_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/rt_rewrite/rt_rewrite_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/acl_wl",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dacl_wl_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/acl_wl.dir/acl_wl.c.o   -c /home/billing/freeDiameter/extensions/acl_wl/acl_wl.c",
+  "file": "/home/billing/freeDiameter/extensions/acl_wl/acl_wl.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/acl_wl",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dacl_wl_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/acl_wl.dir/aw_tree.c.o   -c /home/billing/freeDiameter/extensions/acl_wl/aw_tree.c",
+  "file": "/home/billing/freeDiameter/extensions/acl_wl/aw_tree.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/acl_wl",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dacl_wl_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/acl_wl -o CMakeFiles/acl_wl.dir/lex.aw_conf.c.o   -c /home/billing/freeDiameter/build/extensions/acl_wl/lex.aw_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/acl_wl/lex.aw_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/acl_wl",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dacl_wl_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/acl_wl -o CMakeFiles/acl_wl.dir/aw_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/acl_wl/aw_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/acl_wl/aw_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_dict_dump",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_dict_dump_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_dict_dump.dir/dbg_dict_dump.c.o   -c /home/billing/freeDiameter/extensions/dbg_dict_dump/dbg_dict_dump.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_dict_dump/dbg_dict_dump.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_loglevel",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_loglevel_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/dbg_loglevel  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_loglevel.dir/dbg_loglevel.c.o   -c /home/billing/freeDiameter/extensions/dbg_loglevel/dbg_loglevel.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_loglevel/dbg_loglevel.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_loglevel",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_loglevel_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/dbg_loglevel  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/dbg_loglevel -o CMakeFiles/dbg_loglevel.dir/lex.dbg_loglevel_conf.c.o   -c /home/billing/freeDiameter/build/extensions/dbg_loglevel/lex.dbg_loglevel_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/dbg_loglevel/lex.dbg_loglevel_conf.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_loglevel",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_loglevel_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/home/billing/freeDiameter/build/extensions/dbg_loglevel  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/dbg_loglevel -o CMakeFiles/dbg_loglevel.dir/dbg_loglevel_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/dbg_loglevel/dbg_loglevel_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/dbg_loglevel/dbg_loglevel_conf.tab.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_monitor",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_monitor_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_monitor.dir/dbg_monitor.c.o   -c /home/billing/freeDiameter/extensions/dbg_monitor/dbg_monitor.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_monitor/dbg_monitor.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_msg_timings",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_msg_timings_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_msg_timings.dir/dbg_msg_timings.c.o   -c /home/billing/freeDiameter/extensions/dbg_msg_timings/dbg_msg_timings.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_msg_timings/dbg_msg_timings.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_msg_dumps",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_msg_dumps_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_msg_dumps.dir/dbg_msg_dumps.c.o   -c /home/billing/freeDiameter/extensions/dbg_msg_dumps/dbg_msg_dumps.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_msg_dumps/dbg_msg_dumps.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/dbg_rt",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Ddbg_rt_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/dbg_rt.dir/dbg_rt.c.o   -c /home/billing/freeDiameter/extensions/dbg_rt/dbg_rt.c",
+  "file": "/home/billing/freeDiameter/extensions/dbg_rt/dbg_rt.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/test_cc",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dtest_cc_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/test_cc.dir/test_cc.c.o   -c /home/billing/freeDiameter/extensions/test_cc/test_cc.c",
+  "file": "/home/billing/freeDiameter/extensions/test_cc/test_cc.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/test_ccload",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dtest_ccload_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/test_ccload.dir/test_ccload.c.o   -c /home/billing/freeDiameter/extensions/test_ccload/test_ccload.c",
+  "file": "/home/billing/freeDiameter/extensions/test_ccload/test_ccload.c"
+}
+]

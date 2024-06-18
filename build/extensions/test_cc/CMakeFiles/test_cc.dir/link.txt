@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../test_cc.fdx CMakeFiles/test_cc.dir/test_cc.c.o 

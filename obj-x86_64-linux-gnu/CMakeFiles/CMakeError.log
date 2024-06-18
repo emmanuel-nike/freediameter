@@ -1,0 +1,117 @@
+Determining if the ntohll exist failed with the following output:
+Change Dir: /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bedd8/fast && make[1]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_bedd8.dir/build.make CMakeFiles/cmTC_bedd8.dir/build
+make[2]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bedd8.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_bedd8.dir/CheckSymbolExists.c.o   -c /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘ntohll’ undeclared (first use in this function); did you mean ‘ntohl’?
+    8 |   return ((int*)(&ntohll))[argc];
+      |                   ^~~~~~
+      |                   ntohl
+/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+make[2]: *** [CMakeFiles/cmTC_bedd8.dir/build.make:66: CMakeFiles/cmTC_bedd8.dir/CheckSymbolExists.c.o] Error 1
+make[2]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_bedd8/fast] Error 2
+make[1]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+
+
+File /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <netinet/in.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef ntohll
+  return ((int*)(&ntohll))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_22d0a/fast && make[1]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_22d0a.dir/build.make CMakeFiles/cmTC_22d0a.dir/build
+make[2]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_22d0a.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_22d0a.dir/src.c.o   -c /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_22d0a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22d0a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_22d0a.dir/src.c.o  -o cmTC_22d0a 
+/usr/bin/ld: CMakeFiles/cmTC_22d0a.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/cmTC_22d0a.dir/build.make:87: cmTC_22d0a] Error 1
+make[2]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_22d0a/fast] Error 2
+make[1]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9b2b6/fast && make[1]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_9b2b6.dir/build.make CMakeFiles/cmTC_9b2b6.dir/build
+make[2]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9b2b6.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_9b2b6.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_9b2b6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9b2b6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_9b2b6.dir/CheckFunctionExists.c.o  -o cmTC_9b2b6  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/cmTC_9b2b6.dir/build.make:87: cmTC_9b2b6] Error 1
+make[2]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_9b2b6/fast] Error 2
+make[1]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function sctp_connectx exists failed with the following output:
+Change Dir: /home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4ce3e/fast && make[1]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_4ce3e.dir/build.make CMakeFiles/cmTC_4ce3e.dir/build
+make[2]: Entering directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4ce3e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sctp_connectx   -o CMakeFiles/cmTC_4ce3e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4ce3e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ce3e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sctp_connectx    -rdynamic CMakeFiles/cmTC_4ce3e.dir/CheckFunctionExists.c.o  -o cmTC_4ce3e 
+/usr/bin/ld: CMakeFiles/cmTC_4ce3e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x14): undefined reference to `sctp_connectx'
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/cmTC_4ce3e.dir/build.make:87: cmTC_4ce3e] Error 1
+make[2]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_4ce3e/fast] Error 2
+make[1]: Leaving directory '/home/billing/freeDiameter/obj-x86_64-linux-gnu/CMakeFiles/CMakeTmp'
+
+
+

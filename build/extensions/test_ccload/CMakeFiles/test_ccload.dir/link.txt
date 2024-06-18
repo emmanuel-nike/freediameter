@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../test_ccload.fdx CMakeFiles/test_ccload.dir/test_ccload.c.o 

@@ -1,0 +1,59 @@
+ECHO Test-Request received from 08:54:47  ERROR  ERROR: Invalid parameter '(( (((reference) && (((struct msg_avp_chain *)(reference))->type == MSG_MSG) && (((struct msg *)(reference))->msg_eyec == (0x11355463)))) || (((reference) && (((struct msg_avp_chain *)(reference))->type == MSG_AVP) && (((struct avp *)(reference))->avp_eyec == (0x11355467)))) ) && what)', 22
+08:54:47  ERROR  ERROR: in '((fd_msg_search_avp ( *msg, ta_origin_host, &a)))' :	Invalid argument
+08:54:47  ERROR  ERROR: in '((r = (*hdl->cb)(msg, avp, sess, hdl->opaque, action)))' :	Invalid argument
+08:54:47  ERROR  Message discarded ('Internal error: a DISPATCH callback returned an error'):
+08:54:47  ERROR     'Credit-Control-Request'
+08:54:47  ERROR       Version: 0x01
+08:54:47  ERROR       Length: 816
+08:54:47  ERROR       Flags: 0xC0 (RP--)
+08:54:47  ERROR       Command Code: 272
+08:54:47  ERROR       ApplicationId: 4
+08:54:47  ERROR       Hop-by-Hop Identifier: 0x3420362C
+08:54:47  ERROR       End-to-End Identifier: 0xB342F633
+08:54:47  ERROR        {internal data}: src:gy.ugw02.swiftng.com(20) rwb:(nil) rt:1 cb:(nil),(nil)((nil)) qry:(nil) asso:0 sess:0x7f7a1c0022c0
+08:54:47  ERROR        AVP: 'Session-Id'(263) l=49 f=-M val="gy.ugw02.swiftng.com;3926739287;720;23452"
+08:54:47  ERROR        AVP: 'Auth-Application-Id'(258) l=12 f=-M val=4 (0x4)
+08:54:47  ERROR        AVP: 'Origin-Host'(264) l=28 f=-M val="gy.ugw02.swiftng.com"
+08:54:47  ERROR        AVP: 'Origin-Realm'(296) l=19 f=-M val="swiftng.com"
+08:54:47  ERROR        AVP: 'Destination-Realm'(283) l=19 f=-M val="wispgate.io"
+08:54:47  ERROR        AVP: 'Service-Context-Id'(461) l=22 f=-M val="32251@3gpp.org"
+08:54:47  ERROR        AVP: 'CC-Request-Type'(416) l=12 f=-M val='INITIAL_REQUEST' (1 (0x1))
+08:54:47  ERROR        AVP: 'CC-Request-Number'(415) l=12 f=-M val=0 (0x0)
+08:54:47  ERROR        AVP: 'Destination-Host'(293) l=25 f=-M val="swift.wispgate.io"
+08:54:47  ERROR        AVP: 'Origin-State-Id'(278) l=12 f=-M val=3828634399 (0xe434531f)
+08:54:47  ERROR        AVP: 'Event-Timestamp'(55) l=12 f=-M val=20240607T085447+00
+08:54:47  ERROR        AVP: 'Subscription-Id'(443) l=44 f=-M val=(grouped)
+08:54:47  ERROR           AVP: 'Subscription-Id-Type'(450) l=12 f=-M val='END_USER_E164' (0 (0x0))
+08:54:47  ERROR           AVP: 'Subscription-Id-Data'(444) l=21 f=-M val="2342600064592"
+08:54:47  ERROR        AVP: 'Subscription-Id'(443) l=44 f=-M val=(grouped)
+08:54:47  ERROR           AVP: 'Subscription-Id-Type'(450) l=12 f=-M val='END_USER_IMSI' (1 (0x1))
+08:54:47  ERROR           AVP: 'Subscription-Id-Data'(444) l=23 f=-M val="621260010042692"
+08:54:47  ERROR        AVP: 'Multiple-Services-Indicator'(455) l=12 f=-M val='MULTIPLE_SERVICES_SUPPORTED' (1 (0x1))
+08:54:47  ERROR        AVP: 'Multiple-Services-Credit-Control'(456) l=28 f=-M val=(grouped)
+08:54:47  ERROR           AVP: 'Requested-Service-Unit'(437) l=8 f=-M val=(grouped)
+08:54:47  ERROR           AVP: 'Rating-Group'(432) l=12 f=-M val=100 (0x64)
+08:54:47  ERROR        AVP: 'User-Equipment-Info'(458) l=36 f=-- val=(grouped)
+08:54:47  ERROR           AVP: 'User-Equipment-Info-Type'(459) l=12 f=-- val='IMEISV' (0 (0x0))
+08:54:47  ERROR           AVP: 'User-Equipment-Info-Value'(460) l=16 f=-- val=<53 94 27 60 53 50 96 00>
+08:54:47  ERROR        AVP: 'Service-Information'(873) vend='3GPP'(10415) l=400 f=VM val=(grouped)
+08:54:47  ERROR           AVP: 'PS-Information'(874) vend='3GPP'(10415) l=388 f=VM val=(grouped)
+08:54:47  ERROR              AVP: '3GPP-Charging-Id'(2) vend='3GPP'(10415) l=16 f=V- val=2317923439 (0x8a28b46f)
+08:54:47  ERROR              AVP: '3GPP-PDP-Type'(3) vend='3GPP'(10415) l=16 f=V- val=0 (0x0)
+08:54:47  ERROR              AVP: 'PDP-Address'(1227) vend='3GPP'(10415) l=18 f=VM val=41.58.217.19
+08:54:47  ERROR              AVP: '3GPP-GPRS-Negotiated-QoS-Profile'(5) vend='3GPP'(10415) l=35 f=V- val="08-7c09000c350000027100"
+08:54:47  ERROR              AVP: 'SGSN-Address'(1228) vend='3GPP'(10415) l=18 f=VM val=10.200.21.91
+08:54:47  ERROR              AVP: 'GGSN-Address'(847) vend='3GPP'(10415) l=18 f=VM val=10.200.21.91
+08:54:47  ERROR              AVP: 'CG-Address'(846) vend='3GPP'(10415) l=18 f=VM val=10.200.19.5
+08:54:47  ERROR              AVP: '3GPP-IMSI-MCC-MNC'(8) vend='3GPP'(10415) l=17 f=V- val="62126"
+08:54:47  ERROR              AVP: '3GPP-GGSN-MCC-MNC'(9) vend='3GPP'(10415) l=17 f=V- val="62126"
+08:54:47  ERROR              AVP: '3GPP-NSAPI'(10) vend='3GPP'(10415) l=13 f=V- val=<35>
+08:54:47  ERROR              AVP: 'Called-Station-Id'(30) l=20 f=-M val="ocs.poctest1"
+08:54:47  ERROR              AVP: '3GPP-Selection-Mode'(12) vend='3GPP'(10415) l=13 f=V- val="0"
+08:54:47  ERROR              AVP: '3GPP-Charging-Characteristics'(13) vend='3GPP'(10415) l=16 f=V- val="0800"
+08:54:47  ERROR              AVP: '3GPP-SGSN-MCC-MNC'(18) vend='3GPP'(10415) l=17 f=V- val="62126"
+08:54:47  ERROR              AVP: '3GPP-MS-TimeZone'(23) vend='3GPP'(10415) l=14 f=V- val=<40 00>
+08:54:47  ERROR              AVP: '3GPP-User-Location-Info'(22) vend='3GPP'(10415) l=25 f=V- val=<82 26 F1 62 65 9C 26 F1 62 00 2B 23 02>
+08:54:47  ERROR              AVP: '3GPP-RAT-Type'(21) vend='3GPP'(10415) l=13 f=V- val=<06>
+08:54:47  ERROR              AVP: 'PDP-Context-Type'(1247) vend='3GPP'(10415) l=16 f=VM val=0 (0x0)
+08:54:47  ERROR              AVP: 'Charging-Rule-Base-Name'(1004) vend='3GPP'(10415) l=24 f=VM val="ocs_poctest1"
+08:54:47  ERROR        AVP: 'Route-Record'(282) l=8 f=-M val="gy.ugw02.swiftng.com"

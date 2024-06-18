@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/libfdcore.dir/apps.c.o"
+  "CMakeFiles/libfdcore.dir/cnxctx.c.o"
+  "CMakeFiles/libfdcore.dir/config.c.o"
+  "CMakeFiles/libfdcore.dir/core.c.o"
+  "CMakeFiles/libfdcore.dir/dict_base_proto.c.o"
+  "CMakeFiles/libfdcore.dir/endpoints.c.o"
+  "CMakeFiles/libfdcore.dir/events.c.o"
+  "CMakeFiles/libfdcore.dir/extensions.c.o"
+  "CMakeFiles/libfdcore.dir/fdd.tab.c.o"
+  "CMakeFiles/libfdcore.dir/fifo_stats.c.o"
+  "CMakeFiles/libfdcore.dir/hooks.c.o"
+  "CMakeFiles/libfdcore.dir/lex.fdd.c.o"
+  "CMakeFiles/libfdcore.dir/messages.c.o"
+  "CMakeFiles/libfdcore.dir/p_ce.c.o"
+  "CMakeFiles/libfdcore.dir/p_cnx.c.o"
+  "CMakeFiles/libfdcore.dir/p_dp.c.o"
+  "CMakeFiles/libfdcore.dir/p_dw.c.o"
+  "CMakeFiles/libfdcore.dir/p_expiry.c.o"
+  "CMakeFiles/libfdcore.dir/p_out.c.o"
+  "CMakeFiles/libfdcore.dir/p_psm.c.o"
+  "CMakeFiles/libfdcore.dir/p_sr.c.o"
+  "CMakeFiles/libfdcore.dir/peers.c.o"
+  "CMakeFiles/libfdcore.dir/queues.c.o"
+  "CMakeFiles/libfdcore.dir/routing_dispatch.c.o"
+  "CMakeFiles/libfdcore.dir/sctp.c.o"
+  "CMakeFiles/libfdcore.dir/sctp3436.c.o"
+  "CMakeFiles/libfdcore.dir/server.c.o"
+  "CMakeFiles/libfdcore.dir/tcp.c.o"
+  "CMakeFiles/libfdcore.dir/version.c.o"
+  "fdd.tab.c"
+  "fdd.tab.h"
+  "lex.fdd.c"
+  "libfdcore.pdb"
+  "libfdcore.so"
+  "libfdcore.so.1.5.0"
+  "libfdcore.so.6"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/libfdcore.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

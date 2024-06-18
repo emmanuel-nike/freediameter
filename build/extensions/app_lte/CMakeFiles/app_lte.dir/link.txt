@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../app_lte.fdx CMakeFiles/app_lte.dir/app_lte.c.o CMakeFiles/app_lte.dir/lex.ta_conf.c.o CMakeFiles/app_lte.dir/ta_conf.tab.c.o CMakeFiles/app_lte.dir/ta_dict.c.o CMakeFiles/app_lte.dir/ta_serv.c.o CMakeFiles/app_lte.dir/app_lte_mysql.c.o 

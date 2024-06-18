@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../dbg_loglevel.fdx CMakeFiles/dbg_loglevel.dir/dbg_loglevel.c.o CMakeFiles/dbg_loglevel.dir/lex.dbg_loglevel_conf.c.o CMakeFiles/dbg_loglevel.dir/dbg_loglevel_conf.tab.c.o 

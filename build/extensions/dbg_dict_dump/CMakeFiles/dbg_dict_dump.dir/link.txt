@@ -1,0 +1,1 @@
+/usr/bin/gcc -fPIC -Wall -g -O0  -shared  -o ../dbg_dict_dump.fdx CMakeFiles/dbg_dict_dump.dir/dbg_dict_dump.c.o 
