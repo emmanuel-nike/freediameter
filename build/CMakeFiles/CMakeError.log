@@ -107,3 +107,26 @@ make: *** [Makefile:121: cmTC_71a20/fast] Error 2
 
 
 
+Performing C SOURCE FILE Test HAVE_MYSQL_MY_BOOL failed with the following output:
+Change Dir: /home/billing/freeDiameter/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f9545/fast && /usr/bin/make -f CMakeFiles/cmTC_f9545.dir/build.make CMakeFiles/cmTC_f9545.dir/build
+make[1]: Entering directory '/home/billing/freeDiameter/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f9545.dir/src.c.o
+/usr/bin/gcc  -I/usr/include/mysql  -DHAVE_MYSQL_MY_BOOL   -o CMakeFiles/cmTC_f9545.dir/src.c.o   -c /home/billing/freeDiameter/build/CMakeFiles/CMakeTmp/src.c
+/home/billing/freeDiameter/build/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/billing/freeDiameter/build/CMakeFiles/CMakeTmp/src.c:4:1: error: unknown type name ‘my_bool’; did you mean ‘bool’?
+    4 | my_bool f;
+      | ^~~~~~~
+      | bool
+make[1]: *** [CMakeFiles/cmTC_f9545.dir/build.make:66: CMakeFiles/cmTC_f9545.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/billing/freeDiameter/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_f9545/fast] Error 2
+
+
+Source file was:
+
+#include <mysql.h>
+int main() {
+my_bool f;
+}

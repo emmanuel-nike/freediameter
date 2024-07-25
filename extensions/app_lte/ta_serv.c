@@ -35,7 +35,7 @@
 
 /* Install the dispatch callbacks */
 
-#include "lte_common.h"
+#include "app_lte_common.h"
 
 static struct disp_hdl * ta_hdl_fb = NULL; /* handler for fallback cb */
 static struct disp_hdl * ta_hdl_tr = NULL; /* handler for Test-Request req cb */
@@ -63,18 +63,18 @@ static int ta_tr_cb( struct msg ** msg, struct avp * avp, struct session * sess,
 		return EINVAL;
 	
 	/* Value of Origin-Host */
-	if (! (ta_conf->mode & MODE_BENCH)) {
-		fprintf(stderr, "ECHO Test-Request received from ");
-		CHECK_FCT( fd_msg_search_avp ( *msg, dataobj_origin_host, &a) );
-		if (a) {
-			struct avp_hdr * hdr;
-			CHECK_FCT( fd_msg_avp_hdr( a, &hdr ) );
-			fprintf(stderr, "'%.*s'", (int)hdr->avp_value->os.len, hdr->avp_value->os.data);
-		} else {
-			fprintf(stderr, "no_Origin-Host");
-		}
-		fprintf(stderr, ", replying...\n");
+	
+	fprintf(stderr, "ECHO Test-Request received from ");
+	CHECK_FCT( fd_msg_search_avp ( *msg, dataobj_origin_host, &a) );
+	if (a) {
+		struct avp_hdr * hdr;
+		CHECK_FCT( fd_msg_avp_hdr( a, &hdr ) );
+		fprintf(stderr, "'%.*s'", (int)hdr->avp_value->os.len, hdr->avp_value->os.data);
+	} else {
+		fprintf(stderr, "no_Origin-Host");
 	}
+	fprintf(stderr, ", replying...\n");
+	
 	
 	/* Create answer header */
 	qry = *msg;
@@ -216,9 +216,6 @@ static int ta_tr_cb( struct msg ** msg, struct avp * avp, struct session * sess,
 	CHECK_FCT( fd_msg_send( msg, NULL, NULL ) );
 	
 	/* Add this value to the stats */
-	CHECK_POSIX_DO( pthread_mutex_lock(&ta_conf->stats_lock), );
-	ta_conf->stats.nb_echoed++;
-	CHECK_POSIX_DO( pthread_mutex_unlock(&ta_conf->stats_lock), );
 	
 	return 0;
 }

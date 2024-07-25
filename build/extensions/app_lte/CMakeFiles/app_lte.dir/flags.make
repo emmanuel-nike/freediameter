@@ -6,9 +6,9 @@ C_FLAGS = -Wall -g -O0 -fPIC -fvisibility=hidden
 
 C_DEFINES = -D_GNU_SOURCE -Dapp_lte_EXPORTS
 
-C_INCLUDES = -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include 
+C_INCLUDES = -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql 
 
-# Custom flags: extensions/app_lte/CMakeFiles/app_lte.dir/lex.ta_conf.c.o_FLAGS = -I /home/billing/freeDiameter/extensions/app_lte
+# Custom flags: extensions/app_lte/CMakeFiles/app_lte.dir/lex.app_lte_conf.c.o_FLAGS = -I /home/billing/freeDiameter/extensions/app_lte
 
-# Custom flags: extensions/app_lte/CMakeFiles/app_lte.dir/ta_conf.tab.c.o_FLAGS = -I /home/billing/freeDiameter/extensions/app_lte
+# Custom flags: extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_conf.tab.c.o_FLAGS = -I /home/billing/freeDiameter/extensions/app_lte
 

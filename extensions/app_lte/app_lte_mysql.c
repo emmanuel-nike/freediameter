@@ -35,34 +35,34 @@
 
 static pthread_mutex_t db_cs_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-int get_lte_user(struct eap_user * user, char * username)
+int get_lte_subscriber(struct lte_subscriber *user, char *username)
 {
-	TRACE_ENTRY("%p %p",user,username);
+	fprintf(stderr, "\nECHO MYSQL_CHECKING_USER %s", username);
+	TRACE_ENTRY("%p %p", user, username);
 	if (db_conn == NULL)
 	{
-		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.",DIAMEAP_EXTENSION);
+		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.", APP_LTE_EXTENSION);
 
 		return EINVAL;
-
 	}
 	mysql_thread_init();
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	char * query;
-	CHECK_MALLOC(query=(char *)malloc(sizeof(char)*255));
+	char *query;
+	CHECK_MALLOC(query = (char *)malloc(sizeof(char) * 255));
 
 	sprintf(
-			query,
-			"SELECT id,username,password,eapmethod, vendor FROM users WHERE  users.username='%s' and users.active='Y' ",
-			username);
+		query,
+		"SELECT id,username,password,eapmethod, vendor FROM users WHERE  users.username='%s' and users.active='Y' ",
+		username);
 
-	CHECK_POSIX(pthread_mutex_lock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
 	if (mysql_query(db_conn, query))
 	{
-		CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
-		TRACE_DEBUG(INFO, "%sQuery execution fail. %s",DIAMEAP_EXTENSION, mysql_error(db_conn));
+		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
+		TRACE_DEBUG(INFO, "%sQuery execution fail. %s", APP_LTE_EXTENSION, mysql_error(db_conn));
 		mysql_thread_end();
 		free(query);
 		query = NULL;
@@ -71,20 +71,15 @@ int get_lte_user(struct eap_user * user, char * username)
 
 	res = mysql_store_result(db_conn);
 
-	CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
 
 	if ((row = mysql_fetch_row(res)) != NULL)
 	{
 
 		user->id = atoi(row[0]);
-		CHECK_MALLOC(user->userid=malloc(strlen(row[1])+1));
-		memcpy(user->userid,row[1],strlen(row[1])+1);
+		CHECK_MALLOC(user->userid = malloc(strlen(row[1]) + 1));
+		memcpy(user->userid, row[1], strlen(row[1]) + 1);
 		user->useridLength = strlen(row[1]);
-		CHECK_MALLOC(user->password=malloc(strlen(row[2])+1));
-		memcpy(user->password, row[2],strlen(row[2])+1);
-		user->passwordLength = strlen(row[2]);
-		user->proposed_eap_method = atoi(row[3]);
-		user->proposed_eap_method_vendor = atoi(row[4]);
 
 		mysql_free_result(res);
 		mysql_thread_end();
@@ -93,45 +88,47 @@ int get_lte_user(struct eap_user * user, char * username)
 		return 0;
 	}
 
-	TRACE_DEBUG(INFO, "%sUser unavailable.",DIAMEAP_EXTENSION);
+	TRACE_DEBUG(INFO, "%sUser unavailable.", APP_LTE_EXTENSION);
 	mysql_free_result(res);
 	mysql_thread_end();
 	free(query);
 	query = NULL;
 	return EINVAL;
-
 }
 
-int get_authentication_attribs(struct eap_user *user, struct fd_list * attribute_list)
+int app_lte_authentication_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list)
 {
-
-	TRACE_ENTRY("%p %p",user,attribute_list);
+	TRACE_ENTRY("%p %p", user, attribute_list);
+	fprintf(stderr, "\nECHO MYSQL_AUTHENTICATING %s", user->userid);
 
 	if (db_conn == NULL)
 	{
-		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.",DIAMEAP_EXTENSION);
+		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.", APP_LTE_EXTENSION);
 
 		return EINVAL;
-
 	}
 
 	mysql_thread_init();
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	char * query;
-	CHECK_MALLOC(query=malloc(sizeof(char)*255));
+	char *query;
+	CHECK_MALLOC(query = malloc(sizeof(char) * 255));
 
+	// sprintf(
+	// 	query,
+	// 	"SELECT `lte_authe`.`attribute` ,`lte_authe`.`value` FROM `lte_authe` WHERE `lte_authe`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d ) ",
+	// 	user->userid);
 	sprintf(
-			query,
-			"SELECT `authe`.`attribute` ,`authe`.`value` FROM `authe` WHERE `authe`.`grp` IN ( SELECT `user_grp`.`grp` FROM `user_grp` WHERE `user_grp`.`user` = %d ) ",
-			user->id);
+		query,
+		"SELECT `lte_authe`.`attribute` ,`lte_authe`.`value` FROM `lte_authe` WHERE `lte_authe`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d ) ",
+		user->userid);
 
-	CHECK_POSIX(pthread_mutex_lock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
 	if (mysql_query(db_conn, query))
 	{
-		CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
-		TRACE_DEBUG(INFO, "%sQuery execution fail. %s",DIAMEAP_EXTENSION, mysql_error(db_conn));
+		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
+		TRACE_DEBUG(INFO, "%sQuery execution fail. %s", APP_LTE_EXTENSION, mysql_error(db_conn));
 		mysql_thread_end();
 		free(query);
 		query = NULL;
@@ -140,11 +137,11 @@ int get_authentication_attribs(struct eap_user *user, struct fd_list * attribute
 
 	res = mysql_store_result(db_conn);
 
-	CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
 
 	while ((row = mysql_fetch_row(res)))
 	{
-		struct auth_attribute * attribute;
+		struct auth_attribute *attribute;
 		CHECK_MALLOC(attribute = malloc(sizeof(struct auth_attribute)));
 		memset(attribute, 0, sizeof(struct auth_attribute));
 		fd_list_init(&attribute->chain, NULL);
@@ -152,7 +149,6 @@ int get_authentication_attribs(struct eap_user *user, struct fd_list * attribute
 		attribute->op = NULL;
 		attribute->value = strdup(row[1]);
 		fd_list_insert_before(attribute_list, &attribute->chain);
-
 	}
 
 	mysql_free_result(res);
@@ -162,36 +158,36 @@ int get_authentication_attribs(struct eap_user *user, struct fd_list * attribute
 	return 0;
 }
 
-int get_authorization_attribs(struct eap_user *user, struct fd_list * attribute_list)
+int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list)
 {
-	TRACE_ENTRY("%p %p",user,attribute_list);
+	TRACE_ENTRY("%p %p", user, attribute_list);
+	fprintf(stderr, "\nECHO MYSQL_AUTHORIZING %s", user->userid);
 
 	if (db_conn == NULL)
 	{
-		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.",DIAMEAP_EXTENSION);
+		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.", APP_LTE_EXTENSION);
 
 		return EINVAL;
-
 	}
 
 	mysql_thread_init();
 
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	char * query;
-	CHECK_MALLOC(query=malloc(sizeof(char)*255));
+	char *query;
+	CHECK_MALLOC(query = malloc(sizeof(char) * 255));
 
 	sprintf(
-			query,
-			"SELECT `authz`.`attribute` , `authz`.`op` , `authz`.`value` FROM `authz` WHERE `authz`.`grp` IN ( SELECT `user_grp`.`grp` FROM `user_grp` WHERE `user_grp`.`user` = %d ) ",
-			user->id);
+		query,
+		"SELECT `lte_authz`.`attribute` , `lte_authz`.`op` , `lte_authz`.`value` FROM `lte_authz` WHERE `lte_authz`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d )",
+		user->userid);
 
-	CHECK_POSIX(pthread_mutex_lock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
 	if (mysql_query(db_conn, query))
 	{
-		CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
-		TRACE_DEBUG(INFO, "%sQuery execution fail. %s",DIAMEAP_EXTENSION, mysql_error(db_conn));
+		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
+		TRACE_DEBUG(INFO, "%sQuery execution fail. %s", APP_LTE_EXTENSION, mysql_error(db_conn));
 		mysql_thread_end();
 		free(query);
 		query = NULL;
@@ -200,11 +196,11 @@ int get_authorization_attribs(struct eap_user *user, struct fd_list * attribute_
 
 	res = mysql_store_result(db_conn);
 
-	CHECK_POSIX(pthread_mutex_unlock( &db_cs_mutex ));
+	CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
 
 	while ((row = mysql_fetch_row(res)))
 	{
-		struct auth_attribute * attribute;
+		struct auth_attribute *attribute;
 		CHECK_MALLOC(attribute = malloc(sizeof(struct auth_attribute)));
 		memset(attribute, 0, sizeof(struct auth_attribute));
 		fd_list_init(&attribute->chain, NULL);
@@ -221,7 +217,7 @@ int get_authorization_attribs(struct eap_user *user, struct fd_list * attribute_
 	return 0;
 }
 
-void lte_mysql_disconnect()
+void app_lte_mysql_disconnect()
 {
 	mysql_close(db_conn);
 }

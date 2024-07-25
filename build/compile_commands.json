@@ -316,33 +316,38 @@
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte.c",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte.c",
   "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte.c"
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/lex.ta_conf.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/lex.ta_conf.c",
-  "file": "/home/billing/freeDiameter/build/extensions/app_lte/lex.ta_conf.c"
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/lex.app_lte_conf.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/lex.app_lte_conf.c",
+  "file": "/home/billing/freeDiameter/build/extensions/app_lte/lex.app_lte_conf.c"
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/ta_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/ta_conf.tab.c",
-  "file": "/home/billing/freeDiameter/build/extensions/app_lte/ta_conf.tab.c"
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -I /home/billing/freeDiameter/extensions/app_lte -o CMakeFiles/app_lte.dir/app_lte_conf.tab.c.o   -c /home/billing/freeDiameter/build/extensions/app_lte/app_lte_conf.tab.c",
+  "file": "/home/billing/freeDiameter/build/extensions/app_lte/app_lte_conf.tab.c"
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/ta_dict.c.o   -c /home/billing/freeDiameter/extensions/app_lte/ta_dict.c",
-  "file": "/home/billing/freeDiameter/extensions/app_lte/ta_dict.c"
-},
-{
-  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/ta_serv.c.o   -c /home/billing/freeDiameter/extensions/app_lte/ta_serv.c",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/ta_serv.c.o   -c /home/billing/freeDiameter/extensions/app_lte/ta_serv.c",
   "file": "/home/billing/freeDiameter/extensions/app_lte/ta_serv.c"
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
-  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte_mysql.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte_mysql.c",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte_mysql.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte_mysql.c",
   "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte_mysql.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte_server.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte_server.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte_server.c"
+},
+{
+  "directory": "/home/billing/freeDiameter/build/extensions/app_lte",
+  "command": "/usr/bin/gcc -D_GNU_SOURCE -Dapp_lte_EXPORTS -I/home/billing/freeDiameter/include -I/home/billing/freeDiameter/build/include -I/usr/include/mysql  -Wall -g -O0 -fPIC -fvisibility=hidden   -o CMakeFiles/app_lte.dir/app_lte_subscriber.c.o   -c /home/billing/freeDiameter/extensions/app_lte/app_lte_subscriber.c",
+  "file": "/home/billing/freeDiameter/extensions/app_lte/app_lte_subscriber.c"
 },
 {
   "directory": "/home/billing/freeDiameter/build/extensions/rt_busypeers",

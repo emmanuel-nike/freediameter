@@ -1,0 +1,339 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "extensions/app_lte.fdx"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"ADD_LIBRARY",
+			"FD_ADD_EXTENSION",
+			"INSTALL",
+			"INCLUDE_DIRECTORIES"
+		],
+		"files" : 
+		[
+			"extensions/CMakeLists.txt",
+			"extensions/app_lte/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 49,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 102,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 103,
+				"parent" : 4
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 9,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-Wall -g -O0 -fPIC -fvisibility=hidden  "
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "_GNU_SOURCE"
+				},
+				{
+					"define" : "app_lte_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/home/billing/freeDiameter/include"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/home/billing/freeDiameter/build/include"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/usr/include/mysql"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				4,
+				9,
+				11,
+				13,
+				14
+			]
+		},
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-Wall -g -O0 -fPIC -fvisibility=hidden  "
+				},
+				{
+					"fragment" : "-I /home/billing/freeDiameter/extensions/app_lte"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "_GNU_SOURCE"
+				},
+				{
+					"define" : "app_lte_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/home/billing/freeDiameter/include"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/home/billing/freeDiameter/build/include"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/usr/include/mysql"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				6,
+				7
+			]
+		}
+	],
+	"id" : "app_lte::@f8c3ef9ff0d5e713d682",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "lib/freeDiameter"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "-lgcrypt",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgnutls",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lmysqlclient",
+				"role" : "libraries"
+			}
+		],
+		"language" : "C"
+	},
+	"name" : "app_lte",
+	"nameOnDisk" : "app_lte.fdx",
+	"paths" : 
+	{
+		"build" : "extensions/app_lte",
+		"source" : "extensions/app_lte"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				5,
+				8,
+				10,
+				12
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				4,
+				6,
+				7,
+				9,
+				11,
+				13,
+				14
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				15,
+				16
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte_defs.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte_subscriber.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte_common.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "extensions/app_lte/app_lte.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/lib_app_lte.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 1,
+			"isGenerated" : true,
+			"path" : "build/extensions/app_lte/lex.app_lte_conf.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 1,
+			"isGenerated" : true,
+			"path" : "build/extensions/app_lte/app_lte_conf.tab.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "build/extensions/app_lte/app_lte_conf.tab.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "extensions/app_lte/ta_serv.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte_mysql.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "extensions/app_lte/app_lte_mysql.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "extensions/app_lte/app_lte_server.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "extensions/app_lte/app_lte_server.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "extensions/app_lte/app_lte_subscriber.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/extensions/app_lte/lex.app_lte_conf.c.rule",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/extensions/app_lte/app_lte_conf.tab.c.rule",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "MODULE_LIBRARY"
+}

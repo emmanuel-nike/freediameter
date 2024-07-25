@@ -209,6 +209,33 @@ app_lte.c.s:
 	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte.c.s
 .PHONY : app_lte.c.s
 
+app_lte_conf.tab.o: app_lte_conf.tab.c.o
+
+.PHONY : app_lte_conf.tab.o
+
+# target to build an object file
+app_lte_conf.tab.c.o:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_conf.tab.c.o
+.PHONY : app_lte_conf.tab.c.o
+
+app_lte_conf.tab.i: app_lte_conf.tab.c.i
+
+.PHONY : app_lte_conf.tab.i
+
+# target to preprocess a source file
+app_lte_conf.tab.c.i:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_conf.tab.c.i
+.PHONY : app_lte_conf.tab.c.i
+
+app_lte_conf.tab.s: app_lte_conf.tab.c.s
+
+.PHONY : app_lte_conf.tab.s
+
+# target to generate assembly for a file
+app_lte_conf.tab.c.s:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_conf.tab.c.s
+.PHONY : app_lte_conf.tab.c.s
+
 app_lte_mysql.o: app_lte_mysql.c.o
 
 .PHONY : app_lte_mysql.o
@@ -236,86 +263,86 @@ app_lte_mysql.c.s:
 	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_mysql.c.s
 .PHONY : app_lte_mysql.c.s
 
-lex.ta_conf.o: lex.ta_conf.c.o
+app_lte_server.o: app_lte_server.c.o
 
-.PHONY : lex.ta_conf.o
-
-# target to build an object file
-lex.ta_conf.c.o:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.ta_conf.c.o
-.PHONY : lex.ta_conf.c.o
-
-lex.ta_conf.i: lex.ta_conf.c.i
-
-.PHONY : lex.ta_conf.i
-
-# target to preprocess a source file
-lex.ta_conf.c.i:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.ta_conf.c.i
-.PHONY : lex.ta_conf.c.i
-
-lex.ta_conf.s: lex.ta_conf.c.s
-
-.PHONY : lex.ta_conf.s
-
-# target to generate assembly for a file
-lex.ta_conf.c.s:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.ta_conf.c.s
-.PHONY : lex.ta_conf.c.s
-
-ta_conf.tab.o: ta_conf.tab.c.o
-
-.PHONY : ta_conf.tab.o
+.PHONY : app_lte_server.o
 
 # target to build an object file
-ta_conf.tab.c.o:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_conf.tab.c.o
-.PHONY : ta_conf.tab.c.o
+app_lte_server.c.o:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_server.c.o
+.PHONY : app_lte_server.c.o
 
-ta_conf.tab.i: ta_conf.tab.c.i
+app_lte_server.i: app_lte_server.c.i
 
-.PHONY : ta_conf.tab.i
+.PHONY : app_lte_server.i
 
 # target to preprocess a source file
-ta_conf.tab.c.i:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_conf.tab.c.i
-.PHONY : ta_conf.tab.c.i
+app_lte_server.c.i:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_server.c.i
+.PHONY : app_lte_server.c.i
 
-ta_conf.tab.s: ta_conf.tab.c.s
+app_lte_server.s: app_lte_server.c.s
 
-.PHONY : ta_conf.tab.s
+.PHONY : app_lte_server.s
 
 # target to generate assembly for a file
-ta_conf.tab.c.s:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_conf.tab.c.s
-.PHONY : ta_conf.tab.c.s
+app_lte_server.c.s:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_server.c.s
+.PHONY : app_lte_server.c.s
 
-ta_dict.o: ta_dict.c.o
+app_lte_subscriber.o: app_lte_subscriber.c.o
 
-.PHONY : ta_dict.o
+.PHONY : app_lte_subscriber.o
 
 # target to build an object file
-ta_dict.c.o:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_dict.c.o
-.PHONY : ta_dict.c.o
+app_lte_subscriber.c.o:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_subscriber.c.o
+.PHONY : app_lte_subscriber.c.o
 
-ta_dict.i: ta_dict.c.i
+app_lte_subscriber.i: app_lte_subscriber.c.i
 
-.PHONY : ta_dict.i
+.PHONY : app_lte_subscriber.i
 
 # target to preprocess a source file
-ta_dict.c.i:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_dict.c.i
-.PHONY : ta_dict.c.i
+app_lte_subscriber.c.i:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_subscriber.c.i
+.PHONY : app_lte_subscriber.c.i
 
-ta_dict.s: ta_dict.c.s
+app_lte_subscriber.s: app_lte_subscriber.c.s
 
-.PHONY : ta_dict.s
+.PHONY : app_lte_subscriber.s
 
 # target to generate assembly for a file
-ta_dict.c.s:
-	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/ta_dict.c.s
-.PHONY : ta_dict.c.s
+app_lte_subscriber.c.s:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/app_lte_subscriber.c.s
+.PHONY : app_lte_subscriber.c.s
+
+lex.app_lte_conf.o: lex.app_lte_conf.c.o
+
+.PHONY : lex.app_lte_conf.o
+
+# target to build an object file
+lex.app_lte_conf.c.o:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.app_lte_conf.c.o
+.PHONY : lex.app_lte_conf.c.o
+
+lex.app_lte_conf.i: lex.app_lte_conf.c.i
+
+.PHONY : lex.app_lte_conf.i
+
+# target to preprocess a source file
+lex.app_lte_conf.c.i:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.app_lte_conf.c.i
+.PHONY : lex.app_lte_conf.c.i
+
+lex.app_lte_conf.s: lex.app_lte_conf.c.s
+
+.PHONY : lex.app_lte_conf.s
+
+# target to generate assembly for a file
+lex.app_lte_conf.c.s:
+	cd /home/billing/freeDiameter/build && $(MAKE) -f extensions/app_lte/CMakeFiles/app_lte.dir/build.make extensions/app_lte/CMakeFiles/app_lte.dir/lex.app_lte_conf.c.s
+.PHONY : lex.app_lte_conf.c.s
 
 ta_serv.o: ta_serv.c.o
 
@@ -361,18 +388,21 @@ help:
 	@echo "... app_lte.o"
 	@echo "... app_lte.i"
 	@echo "... app_lte.s"
+	@echo "... app_lte_conf.tab.o"
+	@echo "... app_lte_conf.tab.i"
+	@echo "... app_lte_conf.tab.s"
 	@echo "... app_lte_mysql.o"
 	@echo "... app_lte_mysql.i"
 	@echo "... app_lte_mysql.s"
-	@echo "... lex.ta_conf.o"
-	@echo "... lex.ta_conf.i"
-	@echo "... lex.ta_conf.s"
-	@echo "... ta_conf.tab.o"
-	@echo "... ta_conf.tab.i"
-	@echo "... ta_conf.tab.s"
-	@echo "... ta_dict.o"
-	@echo "... ta_dict.i"
-	@echo "... ta_dict.s"
+	@echo "... app_lte_server.o"
+	@echo "... app_lte_server.i"
+	@echo "... app_lte_server.s"
+	@echo "... app_lte_subscriber.o"
+	@echo "... app_lte_subscriber.i"
+	@echo "... app_lte_subscriber.s"
+	@echo "... lex.app_lte_conf.o"
+	@echo "... lex.app_lte_conf.i"
+	@echo "... lex.app_lte_conf.s"
 	@echo "... ta_serv.o"
 	@echo "... ta_serv.i"
 	@echo "... ta_serv.s"

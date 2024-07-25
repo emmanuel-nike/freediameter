@@ -2,6 +2,12 @@
     "cmake.configureOnOpen": true,
     "files.associations": {
         "*.htm": "htm",
-        "extension.h": "c"
+        "extension.h": "c",
+        "diameap_common.h": "c",
+        "lib_app_lte.h": "c",
+        "app_lte_common.h": "c",
+        "libdiameap.h": "c",
+        "diameap_defs.h": "c",
+        "app_lte_defs.h": "c"
     }
 }

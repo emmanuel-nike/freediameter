@@ -1,0 +1,22 @@
+##### a sample Configuration file for DiamEAP
+
+# MySQL Database settings
+# Specify connection parameters for DiamEAP MySQL database: 
+# - username and password to connect to the MySQL Server
+# - databaseserver : the MySQL server location. It can be the IP address or the host name where MySQL server is located. 'localhost' can be used as the location if the server is locatd in the same host than DiamEAP.
+# - database_name : the created database for DiamEAP.
+
+# Syntax :
+# APP_LTE_MySQL = "<username>" , "<password>" , "<databaseserver>" , "<database_name>";
+
+# Enable/disable checking User's Identity. If disabled, default parameters value will be used for authentication and authorization attributes.
+# Default values are defined in database for 'Default User'.
+Check_User_Identity = 1;
+
+# In addition to authentication DiamEAP can be configured to check authorization of authenticated users. If set to 0 authorization is disabled, otherwise enabled.( by default disabled).
+Authorization = 1;
+
+# After receivin a number of invalid packets, reject the authentication by responding with Failure Authentication. 
+# The default value of maximum number of invalid EAP packets is set to 5 packets. 
+# The value of maximum invalid packets can be modified by adding a new value.
+#MAX_Invalid_Packets=5;

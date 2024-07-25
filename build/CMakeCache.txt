@@ -589,6 +589,12 @@ Monitor extension_BINARY_DIR:STATIC=/home/billing/freeDiameter/build/extensions/
 //Value Computed by CMake
 Monitor extension_SOURCE_DIR:STATIC=/home/billing/freeDiameter/extensions/dbg_monitor
 
+//Path to a file.
+MySQL_INCLUDE_DIR:PATH=/usr/include/mysql
+
+//Path to a library.
+MySQL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libmysqlclient.so
+
 //Specify the default arguments for the tests
 OPT_TEST_ARGUMENTS:BOOL=OFF
 
@@ -667,6 +673,9 @@ WG LTE Diameter Application_SOURCE_DIR:STATIC=/home/billing/freeDiameter/extensi
 //Do not reject a CER/CEA with a Vendor-Specific-Application-Id
 // AVP containing both Auth- and Acct- application AVPs?
 WORKAROUND_ACCEPT_INVALID_VSAI:BOOL=OFF
+
+//Dependencies for the target
+app_lte_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/libgcrypt.so;general;/usr/lib/x86_64-linux-gnu/libgnutls.so;general;/usr/lib/x86_64-linux-gnu/libmysqlclient.so;
 
 //Value Computed by CMake
 freeDiameter core library_BINARY_DIR:STATIC=/home/billing/freeDiameter/build/libfdcore
@@ -913,6 +922,8 @@ DISABLE_PEER_EXPIRY-ADVANCED:INTERNAL=1
 DISABLE_SCTP-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ERRORS_ON_TODO
 ERRORS_ON_TODO-ADVANCED:INTERNAL=1
+//Details about finding GCRYPT
+FIND_PACKAGE_MESSAGE_DETAILS_GCRYPT:INTERNAL=[/usr/lib/x86_64-linux-gnu/libgcrypt.so][/usr/include][v()]
 //Details about finding GNUTLS
 FIND_PACKAGE_MESSAGE_DETAILS_GNUTLS:INTERNAL=[/usr/lib/x86_64-linux-gnu/libgnutls.so][/usr/include][v()]
 //Details about finding PkgConfig
@@ -925,6 +936,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 FLEX_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GCRYPT_INCLUDE_DIR
 GCRYPT_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: GCRYPT_LIBRARY
+GCRYPT_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GITCOMMAND
 GITCOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GNUTLS_INCLUDE_DIR
@@ -953,6 +966,8 @@ HAVE_HOST_BIG_ENDIAN:INTERNAL=TRUE
 HAVE_LONG_OPTIONS:INTERNAL=1
 //Have include malloc.h
 HAVE_MALLOC_H:INTERNAL=1
+//Test HAVE_MYSQL_MY_BOOL
+HAVE_MYSQL_MY_BOOL:INTERNAL=
 //Have function clock_gettime
 HAVE_NATIVE_CLOCK_GETTIME:INTERNAL=1
 //Have function sctp_connectx
@@ -1016,6 +1031,10 @@ MAKECOMMAND-ADVANCED:INTERNAL=1
 MEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: MEMORYCHECK_SUPPRESSIONS_FILE
 MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MySQL_INCLUDE_DIR
+MySQL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MySQL_LIBRARY
+MySQL_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: P4COMMAND
 P4COMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE

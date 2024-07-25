@@ -29,8 +29,8 @@ d7edc5ade5b656f9cb0ca9a65939e20f CMakeFiles/NightlyBuild
 533f0c40f6f71d2531a1f1c3364bc560 CMakeFiles/NightlyUpdate
 b967e249834cdc7cbeddf7b187350871 extensions/acl_wl/aw_conf.tab.c
 59da324122a0bbd7354eb04b9d074979 extensions/acl_wl/lex.aw_conf.c
-b09c3a4a8241a423d2d8cbc7bb466128 extensions/app_lte/lex.ta_conf.c
-18db313356e2de2cedc188c68ed7c3ee extensions/app_lte/ta_conf.tab.c
+40e0d25e4fbff223250011da4fbe71f9 extensions/app_lte/app_lte_conf.tab.c
+d64271c23e64871f4954c63b7dda140d extensions/app_lte/lex.app_lte_conf.c
 31e831a73ec31c1ba8094c4e2a164b30 extensions/dbg_loglevel/dbg_loglevel_conf.tab.c
 2dd93d5ad4f0d6421cc0f20d2ccb5678 extensions/dbg_loglevel/lex.dbg_loglevel_conf.c
 19ec2ddd388ae7e03d2e0193d1a01212 extensions/rt_busypeers/lex.rtbusy_conf.c

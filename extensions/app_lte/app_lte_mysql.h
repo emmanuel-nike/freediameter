@@ -31,30 +31,29 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************************************/
 
-
 #ifndef APP_LTE_MYSQL_H_
 #define APP_LTE_MYSQL_H_
 
+#include "lib_app_lte.h"
 #include <mysql.h>
 
 /* MySQL Database connection */
 MYSQL *db_conn;
 
-int get_lte_user(struct eap_user * user, char * username);
+int get_lte_subscriber(struct lte_subscriber *user, char *username);
 
-int lte_mysql_connect();
+int app_lte_mysql_connect();
 
-int lte_mysql_reconnect();
+int app_lte_mysql_reconnect();
 
-int lte_set_mysql_param(char * user, char * passwd, char * server, char * database);
+int app_lte_set_mysql_param(char *user, char *passwd, char *server, char *database);
 
-void lte_mysql_disconnect();
-
-/* */
-int get_authentication_attribs(struct eap_user *user, struct fd_list * attribute_list);
+void app_lte_mysql_disconnect();
 
 /* */
-int get_authorization_attribs(struct eap_user *user, struct fd_list * attribute_list);
+int app_lte_authentication_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list);
 
+/* */
+int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list);
 
 #endif /* DIAMEAP_MYSQL_H_ */
