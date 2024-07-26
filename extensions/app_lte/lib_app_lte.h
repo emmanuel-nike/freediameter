@@ -68,26 +68,6 @@ struct avp_attribute
 	int tofree;
 };
 
-/************************************************/
-/*		EAP Methods	plugins							*/
-/************************************************/
-
-/* The register functions of an EAP method */
-struct register_plugin
-{
-	char *configure;
-	char *init;
-	char *initPickUp;
-	char *buildReq;
-	char *isDone;
-	char *process;
-	char *check;
-	char *getTimeout;
-	char *getKey;
-	char *unregister;
-	char *datafree;
-};
-
 /* EAP Backend Authenticator State Machine (RFC4137) */
 /* Most of variables are described in the part 6 of the RFC 4137 */
 /* */

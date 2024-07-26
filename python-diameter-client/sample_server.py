@@ -15,5 +15,5 @@ if __name__ == "__main__":
     """
 
     # Generating a Diameter server and starting it
-    server = DiameterServer("10.65.6.251", 3869, 4096, 5, "gy.test.localhost", "localhost")
+    server = DiameterServer("10.65.6.249", 3869, 4096, 5, "gy2-swift.wispgate.io", "wispgate.io")
     server.start()

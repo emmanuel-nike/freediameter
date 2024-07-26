@@ -35,6 +35,8 @@ def generate_generic_diameter_message(diameter_request,
     # Generating response's standard AVPs
     response_avps = list()
 
+    response_avps.append(encodeAVP('Session-Id', 'ee136d75e131a132f558'))
+
     # Adding server's origin host and realm
     response_avps.append(encodeAVP('Origin-Host', origin_host))
     response_avps.append(encodeAVP('Origin-Realm', origin_realm))
@@ -121,8 +123,8 @@ def generate_device_watchdog_answer(diameter_request,
     # Customizing it for Device Watchdog Answer
     dwa_avps.append(encodeAVP(
         'Result-Code', diameter_base. result_codes['DIAMETER_SUCCESS']))
-    dwa_avps.append(encodeAVP(
-        'Origin-State-Id', diameter_request.avps['Origin-State-Id']))
+    # dwa_avps.append(encodeAVP(
+    #     'Origin-State-Id', diameter_request.avps['Origin-State-Id']))
 
     # Create the Diameter response message by joining the header and the AVPs
     dwa_message = createRes(dwa_header, dwa_avps)

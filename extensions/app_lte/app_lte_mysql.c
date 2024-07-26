@@ -42,7 +42,6 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 	if (db_conn == NULL)
 	{
 		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.", APP_LTE_EXTENSION);
-
 		return EINVAL;
 	}
 	mysql_thread_init();
@@ -52,10 +51,7 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 	char *query;
 	CHECK_MALLOC(query = (char *)malloc(sizeof(char) * 255));
 
-	sprintf(
-		query,
-		"SELECT id,username,password,eapmethod, vendor FROM users WHERE  users.username='%s' and users.active='Y' ",
-		username);
+	sprintf(query, "SELECT id,username FROM lte_subscribers WHERE username='%s' and active='Y' ", username);
 
 	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
@@ -63,6 +59,7 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 	{
 		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
 		TRACE_DEBUG(INFO, "%sQuery execution fail. %s", APP_LTE_EXTENSION, mysql_error(db_conn));
+		fprintf(stderr, "\nQuery execution fail. %s", mysql_error(db_conn));
 		mysql_thread_end();
 		free(query);
 		query = NULL;
@@ -89,6 +86,7 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 	}
 
 	TRACE_DEBUG(INFO, "%sUser unavailable.", APP_LTE_EXTENSION);
+	fprintf(stderr, "\nUser not found.");
 	mysql_free_result(res);
 	mysql_thread_end();
 	free(query);
@@ -99,7 +97,6 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 int app_lte_authentication_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list)
 {
 	TRACE_ENTRY("%p %p", user, attribute_list);
-	fprintf(stderr, "\nECHO MYSQL_AUTHENTICATING %s", user->userid);
 
 	if (db_conn == NULL)
 	{
@@ -114,14 +111,10 @@ int app_lte_authentication_get_attribs(struct lte_subscriber *user, struct fd_li
 	char *query;
 	CHECK_MALLOC(query = malloc(sizeof(char) * 255));
 
-	// sprintf(
-	// 	query,
-	// 	"SELECT `lte_authe`.`attribute` ,`lte_authe`.`value` FROM `lte_authe` WHERE `lte_authe`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d ) ",
-	// 	user->userid);
 	sprintf(
 		query,
 		"SELECT `lte_authe`.`attribute` ,`lte_authe`.`value` FROM `lte_authe` WHERE `lte_authe`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d ) ",
-		user->userid);
+		user->id);
 
 	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
@@ -179,8 +172,8 @@ int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_lis
 
 	sprintf(
 		query,
-		"SELECT `lte_authz`.`attribute` , `lte_authz`.`op` , `lte_authz`.`value` FROM `lte_authz` WHERE `lte_authz`.`grp` IN ( SELECT `lte_user_grp`.`grp` FROM `lte_user_grp` WHERE `lte_user_grp`.`user` = %d )",
-		user->userid);
+		"SELECT `attribute` , `op` , `value` FROM `lte_authz` WHERE `grp` IN ( SELECT `grp` FROM `lte_subscriber_grp` WHERE `lte_subscriber` = %d )",
+		user->id);
 
 	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
@@ -214,6 +207,7 @@ int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_lis
 	mysql_thread_end();
 	free(query);
 	query = NULL;
+	fprintf(stderr, "\nECHO MYSQL_AUTHORIZATION DONE");
 	return 0;
 }
 

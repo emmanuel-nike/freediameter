@@ -375,7 +375,7 @@ def decode_OctetString(data,dlen):
 def decode_UTF8String(data,dlen):
     fs="!"+str(dlen-8)+"s"
     dbg="Decoding UTF8 format:",fs
-    # logging.debug(dbg)
+    logging.info(dbg)
     ret=struct.unpack(fs,data.decode("hex")[0:dlen-8])[0]
     utf8=utf8decoder(ret)
     return utf8[0]

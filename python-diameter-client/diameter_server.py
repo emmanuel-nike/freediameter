@@ -64,9 +64,10 @@ class DiameterServer:
 
         # Creating a diameter request message based on the data received
         request = HDRItem()
+        print("\n ===>>> "+str(request_info))
         stripHdr(request, request_info.encode("hex"))
         diameter_request = DiameterMessage(request)
-
+        
         # Generating a response based on the request info and command code
         response = cmd_code_responses.get(
             diameter_request.command_code,

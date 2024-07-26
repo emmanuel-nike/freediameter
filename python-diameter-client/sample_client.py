@@ -9,18 +9,31 @@ and then sends the specified Diameter Requests and interprets the response.
 from time import sleep
 from diameter_client import *
 from diameter_server import *
+from diameter_responses import *
 
 def send_req(client):
     # Generating a standard Diameter request
-    generic_request = client.generate_generic_request(
-        diameter_base.cmd_codes['Capability-Exchange'])
+    # Creating the Diameter Message object to base the request on
+    diameter_request = diameter_base.DiameterMessage()
+    diameter_request.command_code = diameter_base.cmd_codes['Credit-Control']
+    #diameter_request.application_Id = 4
+    diameter_request.avps['Origin-Host'] = "swift.wispgate.io"
+    diameter_request.avps['Origin-Realm'] = "wispgate.io"
+    # diameter_request.avps['Destination-Host'] = self.destination_host
+    # diameter_request.avps['Destination-Realm'] = self.destination_realm
+
+    # Generating a standard Diameter request
+    generic_request = generate_generic_diameter_message(
+        diameter_request, "swift.wispgate.io", "wispgate.io")
+    
+    
 
     cer_header = generic_request['header']
     cer_avps = generic_request['avps']
 
     # Appending the CER specific AVPs
-    cer_avps.append(encodeAVP('Host-IP-Address', '10.65.6.249'))
-    cer_avps.append(encodeAVP('Session-Id', 'ee136d75e131a132f558'))
+    # cer_avps.append(encodeAVP('Host-IP-Address', '10.65.6.249'))
+    
     cer_avps.append(encodeAVP('Product-Name', diameter_base.standard_avp_values['Product-Name']))
     cer_avps.append(encodeAVP('Vendor-Id', diameter_base.standard_avp_values['Vendor-Id']))
     cer_avps.append(encodeAVP('Auth-Application-Id', DIAMETER_APPLICATION_CREDIT_CONTROL))
@@ -29,7 +42,7 @@ def send_req(client):
     cer_avps.append(encodeAVP('CC-Request-Number', 1)) #Initial Request
     cer_avps.append(encodeAVP('Subscription-Id', [
         encodeAVP('Subscription-Id-Type', DI_SUBSCRIPTION_ID_TYPE_END_USER_E164),
-        encodeAVP('Subscription-Id-Data', '2342600064591')
+        encodeAVP('Subscription-Id-Data', '2342600064592')
     ]))
     cer_avps.append(encodeAVP('Multiple-Services-Indicator', DI_MULTIPLE_SERVICES_INDICATOR_MULTIPLE_SERVICES_SUPPORTED))
     cer_avps.append(encodeAVP('Multiple-Services-Credit-Control', [
@@ -49,7 +62,7 @@ if __name__ == '__main__':
     """
 
     # Starting the client
-    client = DiameterClient('10.65.6.251', 3868, "gy.test.localhost", "localhost", "swift.wispgate.io", "wispgate.io")
+    client = DiameterClient('10.65.6.251', 3868, "gy.swift.wg.io", "wg.io", "swift.wispgate.io", "wispgate.io")
     client.start()
 
     # Sending the CER message

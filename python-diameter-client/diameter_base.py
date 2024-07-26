@@ -14,6 +14,7 @@ cmd_codes = {
     'Capability-Exchange': 257,
     'Re-Auth': 258,
     'Device-Watchdog': 280,
+    'Credit-Control': 272
 }
 
 result_codes = {

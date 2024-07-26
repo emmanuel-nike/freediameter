@@ -123,7 +123,6 @@ void app_lte_cli_sess_cleanup(struct sess_state * app_lte_sess_data, os0_t sid, 
 
 static int app_lte_initialize_app_lte_sm(struct app_lte_state_machine * app_lte_sm, struct sess_state * app_lte_sess_data)
 {
-	fprintf(stderr, "ECHO app_lte_initialize_app_lte_sm ");
 	TRACE_ENTRY("%p %p", app_lte_sm, app_lte_sess_data);
 
 	int i;
@@ -278,63 +277,6 @@ static int app_lte_parse_avps(struct app_lte_state_machine * app_lte_sm, struct 
 	{
 		CHECK_FCT(fd_msg_avp_hdr(avp, &avpdata));
 		app_lte_sm->cc_request_type = avpdata->avp_value->i32;
-		fprintf(stderr, "\nECHO CC-Request %i", app_lte_sm->cc_request_type);
-	}
-
-	/* User-Name / Subscription ID Data AVP */
-	avp = NULL;
-	CHECK_FCT(fd_msg_search_avp(req, dataobj_subscription_id_data, &avp));
-	if (avp != NULL)
-	{
-		CHECK_FCT(fd_msg_avp_hdr(avp, &avpdata));
-		struct avp_attribute * attribute;
-		fprintf(stderr, "\nECHO Subscription-Id-Data %s", avpdata->avp_value->os.data);
-		CHECK_MALLOC(attribute = malloc(sizeof(struct avp_attribute)));
-		memset(attribute, 0, sizeof(struct avp_attribute));
-		fd_list_init(&attribute->chain, attribute);
-		attribute->attrib = "Subscription-Id-Data";
-		attribute->value.os.data = avpdata->avp_value->os.data;
-		attribute->value.os.len = avpdata->avp_value->os.len;
-		fd_list_insert_before(&app_lte_sm->req_attributes, &attribute->chain);
-
-		CHECK_FCT_DO(get_lte_subscriber(&app_lte_sm->lte_sm.user, attribute->value.os.data), TRACE_DEBUG(INFO,"%s Unable to parse LTE-Request AVPs.",APP_LTE_EXTENSION));
-	}
-
-	/* Subscription ID AVP */
-	avp = NULL;
-	avp2 = NULL;
-	CHECK_FCT(fd_msg_search_avp(req, dataobj_subscription_id, &avp));
-	if (avp != NULL)
-	{
-		CHECK_FCT(fd_msg_avp_hdr(avp, &avpdata));
-		fprintf(stderr, "\nECHO Subscription-Id %i", avpdata->avp_code);
-		u32 Pi_Code = avpdata->avp_code;
-		int depth;
-		do
-		{
-			struct avp_attribute * attribute;
-			CHECK_MALLOC(attribute = malloc(sizeof(struct avp_attribute)));
-			memset(attribute, 0, sizeof(struct avp_attribute));
-			fd_list_init(&attribute->chain, attribute);
-			attribute->attrib = "Subscription-Id";
-			//grouped AVP
-			fd_list_insert_before(&app_lte_sm->req_attributes,&attribute->chain);
-			ret = 0;
-			depth = 0;
-			ret = fd_msg_browse ( avp, MSG_BRW_NEXT, &avp2, &depth);
-			if (avp2 != NULL)
-			{
-				CHECK_FCT(fd_msg_avp_hdr(avp2, &avpdata));
-				if(!avpdata->avp_value->i32 ){
-					fprintf(stderr, "\nECHO Subscription-Id-Data %s", avpdata->avp_value->os.data);
-				}
-				if(avpdata->avp_value->i32){
-					fprintf(stderr, "\nECHO Subscription-Id-Type %i", avpdata->avp_value->i32);
-				}
-			}
-			avp = avp2;
-		} while ((avp2 != NULL) && (ret == 0) && (ret == 0)
-				&& (avpdata->avp_code == Pi_Code));
 	}
 
 	/* CC Request Number AVP */
@@ -344,6 +286,52 @@ static int app_lte_parse_avps(struct app_lte_state_machine * app_lte_sm, struct 
 	{
 		CHECK_FCT(fd_msg_avp_hdr(avp, &avpdata));
 		app_lte_sm->cc_request_num = avpdata->avp_value->i32;
+	}
+
+	/* Subscription ID AVP */
+	avp = NULL;
+	CHECK_FCT(fd_msg_search_avp(req, dataobj_subscription_id, &avp));
+	if (avp != NULL)
+	{
+
+		CHECK_FCT(fd_msg_avp_hdr(avp, &avpdata));
+
+		avp2 = NULL;
+		CHECK_FCT(fd_msg_search_avp(avp, dataobj_subscription_id_data, &avp2));
+		if(avp2 != NULL) 
+		{
+			CHECK_FCT(fd_msg_avp_hdr(avp2, &avpdata));
+			app_lte_sm->lte_sm.user.userid = avpdata->avp_value->os.data;
+			CHECK_FCT_DO(get_lte_subscriber(&app_lte_sm->lte_sm.user, avpdata->avp_value->os.data), TRACE_DEBUG(INFO,"%s Unable to parse LTE-Request AVPs.",APP_LTE_EXTENSION));
+			if(app_lte_sm->lte_sm.user.id != 0) {
+				app_lte_sm->authSuccess = TRUE;
+				app_lte_sm->authFailure = FALSE;
+			}
+			struct avp_attribute * attribute;
+			CHECK_MALLOC(attribute = malloc(sizeof(struct avp_attribute)));
+			memset(attribute, 0, sizeof(struct avp_attribute));
+			fd_list_init(&attribute->chain, attribute);
+			attribute->attrib = "Subscription-Id-Data";
+			attribute->value.os.data = avpdata->avp_value->os.data;
+			attribute->value.os.len = avpdata->avp_value->os.len;
+			fd_list_insert_before(&app_lte_sm->req_attributes, &attribute->chain);
+		}
+
+		avp2 = NULL;
+		CHECK_FCT(fd_msg_search_avp(avp, dataobj_subscription_id_data, &avp2));
+		if(avp2 != NULL) 
+		{
+			CHECK_FCT(fd_msg_avp_hdr(avp2, &avpdata));
+			struct avp_attribute * attribute;
+			CHECK_MALLOC(attribute = malloc(sizeof(struct avp_attribute)));
+			memset(attribute, 0, sizeof(struct avp_attribute));
+			fd_list_init(&attribute->chain, attribute);
+			attribute->attrib = "Subscription-Id-Type";
+			attribute->value.i32 = avpdata->avp_value->i32;
+			fd_list_insert_before(&app_lte_sm->req_attributes, &attribute->chain);
+		}
+
+		//TODO: Also get the subscription id type
 	}
 
 	return 0;
@@ -588,8 +576,7 @@ static int app_lte_get_auth_attribute(struct fd_list * auth_attributes, char * a
 
 	struct fd_list * attrib;
 
-	for (attrib = auth_attributes->next; attrib != auth_attributes; attrib
-			= attrib->next)
+	for (attrib = auth_attributes->next; attrib != auth_attributes; attrib = attrib->next)
 	{
 		*auth_attrib = (struct auth_attribute *) attrib;
 		if (strcmp((*auth_attrib)->attrib, attribute) == 0)
@@ -650,216 +637,83 @@ static int app_lte_answer_avp_attributes(struct app_lte_state_machine * app_lte_
 	struct avp_attribute * avp_attrib;
 	struct avp_attribute * ans_attrib;
 	struct auth_attribute * auth_attrib;
-
-	/* Authorization-Lifetime */
+	
+	/* Set the CC-Request-Type AVP */
 	{
-		CHECK_FCT(app_lte_get_avp_attribute(&app_lte_sm->req_attributes, "Authorization-Lifetime", &avp_attrib,1, &ret1));
-
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Authorization-Lifetime", &auth_attrib,1, &ret2));
-
-		if ((ret1 == 1) && (ret2 == 0) && (auth_attrib != NULL))
-		{
-
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-
-			fd_list_init(&ans_attrib->chain, NULL);
-
-			ans_attrib->attrib = "Authorization-Lifetime";
-
-			ans_attrib->value.u32 = atoi(auth_attrib->value);
-
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-
-			free_attrib(auth_attrib);
-
-		}
-		if ((ret1 == 0) && (ret2 == 1) && (avp_attrib != NULL))
-		{
-
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-
-			fd_list_init(&ans_attrib->chain, NULL);
-
-			ans_attrib->attrib = "Authorization-Lifetime";
-
-			ans_attrib->value.u32 = avp_attrib->value.u32;
-
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-
-			free_avp_attrib(avp_attrib);
-
-		}
-		if ((ret1 == 0) && (ret2 == 0) && (auth_attrib != NULL) && (avp_attrib
-				!= NULL))
-		{
-
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Authorization-Lifetime";
-			if (avp_attrib->value.u32 < atoi(auth_attrib->value))
-			{
-				ans_attrib->value.u32 = avp_attrib->value.u32;
-			}
-			else
-			{
-				ans_attrib->value.u32 = atoi(auth_attrib->value);
-			}
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-			free_avp_attrib(avp_attrib);
-			free_attrib(auth_attrib);
-		}
+		CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
+		memset(ans_attrib, 0, sizeof(struct avp_attribute));
+		fd_list_init(&ans_attrib->chain, NULL);
+		ans_attrib->attrib = "CC-Request-Type";
+		ans_attrib->value.i32 = app_lte_sm->cc_request_type;
+		fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 	}
 
-	/* Auth-Grace-Period */
+	/* Set the CC-Request-Num AVP */
 	{
-		CHECK_FCT(app_lte_get_avp_attribute(&app_lte_sm->req_attributes, "Auth-Grace-Period", &avp_attrib,1, &ret1));
-
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Auth-Grace-Period", &auth_attrib,1, &ret2));
-
-		if ((ret1 == 1) && (ret2 == 0) && (auth_attrib != NULL))
-		{
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Auth-Grace-Period";
-			ans_attrib->value.u32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-			free_attrib(auth_attrib);
-		}
-		if ((ret1 == 0) && (ret2 == 1) && (avp_attrib != NULL))
-		{
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Auth-Grace-Period";
-			ans_attrib->value.u32 = avp_attrib->value.u32;
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-			free_avp_attrib(avp_attrib);
-		}
-		if ((ret1 == 0) && (ret2 == 0) && (auth_attrib != NULL) && (avp_attrib
-				!= NULL))
-		{
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Auth-Grace-Period";
-			if (avp_attrib->value.u32 < atoi(auth_attrib->value))
-			{
-				ans_attrib->value.u32 = avp_attrib->value.u32;
-			}
-			else
-			{
-				ans_attrib->value.u32 = atoi(auth_attrib->value);
-			}
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-			free_attrib(auth_attrib);
-			free_avp_attrib(avp_attrib);
-		}
+		CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
+		memset(ans_attrib, 0, sizeof(struct avp_attribute));
+		fd_list_init(&ans_attrib->chain, NULL);
+		ans_attrib->attrib = "CC-Request-Number";
+		ans_attrib->value.i32 = app_lte_sm->cc_request_num;
+		fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 	}
 
-	/* Auth-Session-State */
+	/* Set the CC-Total-Octets AVP */
 	{
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Auth-Session-State", &auth_attrib,1, &ret2));
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "CC-Total-Octets", &auth_attrib,1, &ret2));
 		if ((ret2 == 0) && (auth_attrib != NULL))
 		{
 			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
 			memset(ans_attrib, 0, sizeof(struct avp_attribute));
 			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Auth-Session-State";
-			ans_attrib->value.i32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
+			ans_attrib->attrib = "CC-Total-Octets";
+			ans_attrib->value.u64 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 			free_attrib(auth_attrib);
 		}
 	}
 
-	/* Re-Auth-Request-Type */
+	/* Set the CC-Input-Octets AVP */
 	{
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Re-Auth-Request-Type", &auth_attrib,1, &ret2));
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "CC-Input-Octets", &auth_attrib,1, &ret2));
 		if ((ret2 == 0) && (auth_attrib != NULL))
 		{
 			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
 			memset(ans_attrib, 0, sizeof(struct avp_attribute));
 			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Re-Auth-Request-Type";
-			ans_attrib->value.i32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
+			ans_attrib->attrib = "CC-Input-Octets";
+			ans_attrib->value.u64 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 			free_attrib(auth_attrib);
-		}
-		else
-		{
-			ans_attrib = NULL;
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes, "Authorization-Lifetime", &ans_attrib,0, &ret1));
-			if ((ret1 == 0) && (ans_attrib != NULL))
-			{
-				CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-				memset(ans_attrib, 0, sizeof(struct avp_attribute));
-				fd_list_init(&ans_attrib->chain, NULL);
-				ans_attrib->attrib = "Re-Auth-Request-Type";
-				ans_attrib->value.i32 = 0;
-				fd_list_insert_before(&app_lte_sm->ans_attributes,
-						&ans_attrib->chain);
-			}
 		}
 	}
 
-	/* Session-Timeout */
+	/* Set the CC-Output-Octets AVP */
 	{
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Session-Timeout", &auth_attrib,1, &ret2));
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "CC-Output-Octets", &auth_attrib,1, &ret2));
 		if ((ret2 == 0) && (auth_attrib != NULL))
 		{
 			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
 			memset(ans_attrib, 0, sizeof(struct avp_attribute));
 			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Session-Timeout";
-			ans_attrib->value.u32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
+			ans_attrib->attrib = "CC-Output-Octets";
+			ans_attrib->value.u64 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 			free_attrib(auth_attrib);
 		}
 	}
 
-	/* Multi-Round-Time-Out */
+	/* Set the Rating-Group AVP */
 	{
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Multi-Round-Time-Out", &auth_attrib,1, &ret2));
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Rating-Group", &auth_attrib,1, &ret2));
 		if ((ret2 == 0) && (auth_attrib != NULL))
 		{
 			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
 			memset(ans_attrib, 0, sizeof(struct avp_attribute));
 			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Multi-Round-Time-Out";
-			ans_attrib->value.u32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
-			free_attrib(auth_attrib);
-		}
-	}
-
-	/* Acct-Interim-Interval */
-	{
-		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Acct-Interim-Interval", &auth_attrib,1, &ret2));
-		if ((ret2 == 0) && (auth_attrib != NULL))
-		{
-			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
-			memset(ans_attrib, 0, sizeof(struct avp_attribute));
-			fd_list_init(&ans_attrib->chain, NULL);
-			ans_attrib->attrib = "Acct-Interim-Interval";
-			ans_attrib->value.u32 = atoi(auth_attrib->value);
-			fd_list_insert_before(&app_lte_sm->ans_attributes,
-					&ans_attrib->chain);
+			ans_attrib->attrib = "Rating-Group";
+			ans_attrib->value.u64 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 			free_attrib(auth_attrib);
 		}
 	}
@@ -1489,13 +1343,13 @@ static int app_lte_add_avps(struct app_lte_state_machine * app_lte_sm, struct ms
 		CHECK_FCT(fd_msg_avp_add(ans, MSG_BRW_LAST_CHILD, avp));
 	}
 
-	{
-		CHECK_FCT(fd_msg_avp_new(dataobj_subscription_id_data, 0, &avp));
-		avp_val.os.data = app_lte_sm->lte_sm.user.userid;
-		avp_val.os.len = app_lte_sm->lte_sm.user.useridLength;
-		CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-		CHECK_FCT(fd_msg_avp_add(ans, MSG_BRW_LAST_CHILD, avp));
-	}
+	// {
+	// 	CHECK_FCT(fd_msg_avp_new(dataobj_subscription_id_data, 0, &avp));
+	// 	avp_val.os.data = app_lte_sm->lte_sm.user.userid;
+	// 	avp_val.os.len = app_lte_sm->lte_sm.user.useridLength;
+	// 	CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
+	// 	CHECK_FCT(fd_msg_avp_add(ans, MSG_BRW_LAST_CHILD, avp));
+	// }
 	return 0;
 }
 
@@ -1507,89 +1361,22 @@ static int app_lte_add_user_sessions_avps(struct app_lte_state_machine * app_lte
 	union avp_value avp_val;
 	int ret;
 
-	/* Authorization-Lifetime AVP */
+	/* CC Request Type AVP */
 	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Authorization-Lifetime",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_authorization_lifetime, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
+		CHECK_FCT(fd_msg_avp_new(dataobj_cc_request_type, 0, &avp));
+		avp_val.u32 = app_lte_sm->cc_request_type;
+		CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
+		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
 	}
 
-	/* Auth-Grace-Period AVP */
+	/* CC Request Number AVP */
 	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Auth-Grace-Period",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_auth_grace_period, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
+		CHECK_FCT(fd_msg_avp_new(dataobj_cc_request_type, 0, &avp));
+		avp_val.u32 = app_lte_sm->cc_request_num;
+		CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
+		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
 	}
 
-	/* Auth-Session-State AVP */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Auth-Session-State",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_auth_session_state, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Re-Auth-Request-Type AVP */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Re-Auth-Request-Type",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_re_auth_request_type, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Session-Timeout AVP */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Session-Timeout",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_session_timeout, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Acct-Interim-Interval AVP */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Acct-Interim-Interval",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_acct_interim_interval, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
 	return 0;
 }
 
@@ -1611,390 +1398,63 @@ static int app_lte_add_authorization_avps(struct app_lte_state_machine * app_lte
 		return EINVAL;
 	}
 
-	/* Reply-Message */
 	{
 		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Reply-Message",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_reply_message, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Reply-Message",&ans_attrib,1,&ret));
-		}
+		//struct avp * src = NULL;
+		struct avp * group1 = NULL;
+		struct avp * group2 = NULL;
+		struct avp_hdr * hdr = NULL;
+		union avp_value val, val2;
 
-	}
+		CHECK_FCT( fd_msg_avp_new ( dataobj_mscc, 0, &group1 ) );
 
-	/* Service-Type */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Service-Type",&ans_attrib,1,&ret));
+		CHECK_FCT( fd_msg_avp_new ( dataobj_gsu, 0, &group2 ) );
+
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"CC-Total-Octets",&ans_attrib,1,&ret));
 		if ((ret == 0) && (ans_attrib != NULL))
 		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_service_type, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Callback-Number */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Callback-Number",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_callback_number, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Callback-Id */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Callback-Id",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_callback_id, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Idle-Timeout */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Idle-Timeout",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_idle_timeout, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* NAS-Filter-Rule */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"NAS-Filter-Rule",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_nas_filter_rule, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Filter-Id */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Filter-Id",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_filter_id, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Filter-Id",&ans_attrib,1,&ret));
-		}
-
-	}
-
-	/* Configuration-Token */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Configuration-Token",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_configuration_token, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Configuration-Token",&ans_attrib,1,&ret));
-		}
-	}
-
-	/* QoS-Filter-Rule */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"QoS-Filter-Rule",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_qos_filter_rule, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"QoS-Filter-Rule",&ans_attrib,1,&ret));
-		}
-
-	}
-
-	/* Framed-Protocol */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Protocol",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_protocol, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Framed-Routing */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Routing",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_routing, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-
-	}
-
-	/* Framed-MTU */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-MTU",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_mtu, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Framed-Compression */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Compression",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_compression, 0, &avp));
-			avp_val.i32 = ans_attrib->value.i32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Compression",&ans_attrib,1,&ret));
-		}
-
-	}
-	/* Framed-IP-Address */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IP-Address",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ip_address, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Framed-IP-Netmask */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IP-Netmask",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ip_netmask, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Framed-Route */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Route",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_route, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Route",&ans_attrib,1,&ret));
-		}
-	}
-
-	/* Framed-Pool */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Pool",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_pool, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Framed-Interface-Id */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-Interface-Id",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_interface_id, 0, &avp));
+			CHECK_FCT(fd_msg_avp_new(dataobj_cc_total_octets, 0, &avp));
 			avp_val.u64 = ans_attrib->value.u64;
 			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
+			CHECK_FCT( fd_msg_avp_add( group2, MSG_BRW_LAST_CHILD, avp ) );
 			free_ans_attrib(ans_attrib);
 		}
-	}
 
-	/* Framed-IPv6-Prefix */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPv6-Prefix",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ipv6_prefix, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPv6-Prefix",&ans_attrib,1,&ret));
-		}
-	}
-
-	/* Framed-IPv6-Route */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPv6-Route",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ipv6_route, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPv6-Route",&ans_attrib,1,&ret));
-		}
-	}
-
-	/* Framed-IPv6-Pool */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPv6-Pool",&ans_attrib,1,&ret));
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"CC-Input-Octets",&ans_attrib,1,&ret));
 		if ((ret == 0) && (ans_attrib != NULL))
 		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ipv6_pool, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
+			CHECK_FCT(fd_msg_avp_new(dataobj_cc_input_octets, 0, &avp));
+			avp_val.u64 = ans_attrib->value.u64;
 			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
+			CHECK_FCT( fd_msg_avp_add( group2, MSG_BRW_LAST_CHILD, avp ) );
 			free_ans_attrib(ans_attrib);
 		}
-	}
 
-	/* Framed-IPX-Network */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-IPX-Network",&ans_attrib,1,&ret));
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"CC-Output-Octets",&ans_attrib,1,&ret));
 		if ((ret == 0) && (ans_attrib != NULL))
 		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_ipx_network, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
+			CHECK_FCT(fd_msg_avp_new(dataobj_cc_output_octets, 0, &avp));
+			avp_val.u64 = ans_attrib->value.u64;
 			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
+			CHECK_FCT( fd_msg_avp_add( group2, MSG_BRW_LAST_CHILD, avp ) );
 			free_ans_attrib(ans_attrib);
 		}
 
-	}
-	/* Framed-AppleTalk-Link */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-AppleTalk-Link",&ans_attrib,1,&ret));
+		CHECK_FCT( fd_msg_avp_add( group1, MSG_BRW_LAST_CHILD, group2 ) );
+
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Rating-Group",&ans_attrib,1,&ret));
 		if ((ret == 0) && (ans_attrib != NULL))
 		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_appletalk_link, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
+			CHECK_FCT(fd_msg_avp_new(dataobj_rating_group, 0, &group2));
+			avp_val.i32 = ans_attrib->value.i32;
+			CHECK_FCT(fd_msg_avp_setvalue(group2, &avp_val));
+			CHECK_FCT( fd_msg_avp_add( group1, MSG_BRW_LAST_CHILD, group2 ) );
 			free_ans_attrib(ans_attrib);
 		}
 
+		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, group1 ) );
 	}
 
-	/* Framed-AppleTalk-Network */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-AppleTalk-Network",&ans_attrib,1,&ret));
-		while ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_appletalk_network, 0, &avp));
-			avp_val.u32 = ans_attrib->value.u32;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-			CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-AppleTalk-Network",&ans_attrib,1,&ret));
-		}
-
-	}
-
-	/* Framed-AppleTalk-Zone */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-AppleTalk-Zone",&ans_attrib,1,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_framed_appletalk_zone, 0, &avp));
-			avp_val.os.data = ans_attrib->value.os.data;
-			avp_val.os.len = ans_attrib->value.os.len;
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_ans_attrib(ans_attrib);
-		}
-	}
-
-	/* Tunneling */
-	//
-
-	/* State */
-	//
 	return 0;
 }
 
@@ -2039,41 +1499,6 @@ static int app_lte_add_result_code(struct app_lte_state_machine * app_lte_sm, st
 		CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
 		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
 	}
-	return 0;
-}
-
-static int app_lte_add_eap_payload(struct app_lte_state_machine * app_lte_sm, struct msg * ans, struct app_lte_eap_interface *eap_i)
-{
-	TRACE_ENTRY("%p %p",app_lte_sm,ans);
-	struct avp * avp;
-	union avp_value avp_val;
-	int ret;
-	u32 Framed_MTU = 1500; //1500 default value
-	u32 NAS_Port_Type_HeaderLength = 4;
-	int EAP_Max_Length = 0;
-
-	/* get Framed-MTU AVP value */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Framed-MTU",&ans_attrib,0,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			Framed_MTU = ans_attrib->value.u32;
-		}
-	}
-
-	/* get NAS-Port-Type AVP value */
-	{
-		struct avp_attribute * ans_attrib;
-		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"NAS-Port-Type",&ans_attrib,0,&ret));
-		if ((ret == 0) && (ans_attrib != NULL))
-		{
-			// = ans_attrib->value.i32;
-		}
-	}
-
-	//TD take the link type into consideration when calculating EAP_MAX_Length
-	EAP_Max_Length = Framed_MTU - NAS_Port_Type_HeaderLength;
 	return 0;
 }
 
@@ -2124,27 +1549,6 @@ int app_lte_authorize(struct app_lte_state_machine * app_lte_sm)
 	if (app_lte_sm->authorized == FALSE)
 	{
 		app_lte_sm->result_code = 4001; /* DIAMETER_AUTHENTICATION_REJECTED 4001 */
-	}
-	return 0;
-}
-
-static int app_lte_add_accounting_eap_auth_method(struct app_lte_state_machine * app_lte_sm, struct msg * ans)
-{
-	TRACE_ENTRY("%p %p",app_lte_sm,ans);
-	int i = 0;
-	struct avp * avp;
-	union avp_value avp_val;
-	/* Accounting-EAP-Auth-Method AVP */
-	while (i < app_lte_sm->lte_sm.user.methodId)
-	{
-		CHECK_FCT(fd_msg_avp_new(dataobj_accounting_eap_auth_method, 0, &avp));
-
-		// avp_val.u64 = (u64) (((app_lte_sm->lte_sm.user.methods[i].vendor)
-		// 		* pow((double) 2, (double) 32))
-		// 		+ app_lte_sm->lte_sm.user.methods[i].method);
-		CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-		i++;
 	}
 	return 0;
 }
@@ -2292,14 +1696,18 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 				CHECK_FCT_DO( app_lte_add_avps(app_lte_sm, ans,req), {TRACE_DEBUG(INFO,"%s Unable to add AVPs to Answer message.",APP_LTE_EXTENSION); goto s_end;});
 				if (app_lte_sm->authFailure == FALSE)
 				{
-					TRACE_DEBUG(FULL+1,"%sSelect authentication attributes.",APP_LTE_EXTENSION);
-					CHECK_FCT_DO(app_lte_authentication_get_attribs(&app_lte_sm->lte_sm.user, &app_lte_sm->attributes), {TRACE_DEBUG(INFO,"%s Unable to get user's session attributes.",APP_LTE_EXTENSION); goto s_end;});
-					TRACE_DEBUG(FULL+1,"%sCreate answer authentication attributes.",APP_LTE_EXTENSION);
-					CHECK_FCT_DO(app_lte_answer_avp_attributes(app_lte_sm), {TRACE_DEBUG(INFO,"%s Unable to generate answer attributes.",APP_LTE_EXTENSION); goto s_end;});
+					if (app_lte_sm->lte_sm.user.id != 0)
+					{
+						TRACE_DEBUG(FULL+1,"%sSelect authorization attributes.",APP_LTE_EXTENSION);
+						CHECK_FCT_DO(app_lte_authorization_get_attribs(&app_lte_sm->lte_sm.user, &app_lte_sm->attributes), {TRACE_DEBUG(INFO,"%s Unable to get user's session attributes.",APP_LTE_EXTENSION); goto s_end;});
+						TRACE_DEBUG(FULL+1,"%sCreate answer authorization attributes.",APP_LTE_EXTENSION);
+						CHECK_FCT_DO(app_lte_answer_avp_attributes(app_lte_sm), {TRACE_DEBUG(INFO,"%s Unable to generate answer attributes.",APP_LTE_EXTENSION); goto s_end;});
+					}
 
 					if (app_lte_sm->authSuccess == FALSE)
 					{
 						fprintf(stderr, "\nECHO AUTHENTICATING FAILURE ");
+						app_lte_sm->result_code = ER_DIAMETER_AUTHENTICATION_REJECTED;
 						app_lte_sm->state = APP_LTE_SEND_FAILURE;
 					}
 					else
@@ -2329,20 +1737,9 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 
 			case APP_LTE_SEND_SUCCESS:
 				fprintf(stderr, "\nECHO APP_LTE_SEND_SUCCESS ");
-				TRACE_DEBUG(FULL+1,"%sAdding User session AVPs to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
-				CHECK_FCT_DO(app_lte_add_user_sessions_avps(app_lte_sm,ans),{TRACE_DEBUG(INFO,"%s Adding user's session AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
-
-				if (app_lte_sm->auth_request_val == AUTHORIZE_AUTHENTICATE)
-				{
-					TRACE_DEBUG(FULL+1,"%sAdding Authorization AVPs to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
-					CHECK_FCT_DO(app_lte_add_authorization_avps(app_lte_sm,ans),{TRACE_DEBUG(INFO,"%s Adding Authorization AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
-				}
-				TRACE_DEBUG(FULL+1,"%sAdding Result Code AVP to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
+				CHECK_FCT_DO(app_lte_add_user_sessions_avps(app_lte_sm,ans), {	TRACE_DEBUG(INFO,"%s Adding user's session AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
+				CHECK_FCT_DO(app_lte_add_authorization_avps(app_lte_sm, ans), {	TRACE_DEBUG(INFO,"%s Adding Authorization AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
 				CHECK_FCT_DO( app_lte_add_result_code(app_lte_sm, ans, sess),{TRACE_DEBUG(INFO,"%s Adding Result-Code AVP failed.",APP_LTE_EXTENSION); goto s_end;});
-				TRACE_DEBUG(FULL+1,"%sAdding EAP-Payload to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
-				TRACE_DEBUG(FULL+1,"%sAdding EAP success AVPs AVPs to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
-				TRACE_DEBUG(FULL+1,"%sAdding Accounting-EAP-Auth-Method AVPs to Diameter-EAP-Answer.",APP_LTE_EXTENSION);
-				CHECK_FCT_DO(app_lte_add_accounting_eap_auth_method(app_lte_sm, ans),{TRACE_DEBUG(INFO,"%s Adding accounting AVP failed",APP_LTE_EXTENSION); goto s_end;});
 				
 				LOG_N("%s Auth Success: %.*s",APP_LTE_EXTENSION, app_lte_sm->lte_sm.user.useridLength, app_lte_sm->lte_sm.user.userid);
 				
