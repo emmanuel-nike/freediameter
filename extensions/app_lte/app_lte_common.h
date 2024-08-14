@@ -128,6 +128,7 @@ extern struct dict_object *dataobj_gsu;
 extern struct dict_object *dataobj_cc_total_octets;
 extern struct dict_object *dataobj_cc_input_octets;
 extern struct dict_object *dataobj_cc_output_octets;
+extern struct dict_object *dataobj_cc_time;
 extern struct dict_object *dataobj_rating_group;
 extern struct dict_object *dataobj_validity_time;
 

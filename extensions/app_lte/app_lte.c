@@ -128,6 +128,7 @@ struct dict_object *dataobj_gsu = NULL;
 struct dict_object *dataobj_cc_total_octets = NULL;
 struct dict_object *dataobj_cc_input_octets = NULL;
 struct dict_object *dataobj_cc_output_octets = NULL;
+struct dict_object *dataobj_cc_time = NULL;
 struct dict_object *dataobj_rating_group = NULL;
 struct dict_object *dataobj_validity_time = NULL;
 
@@ -186,6 +187,7 @@ static int app_lte_init_obj(void)
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Total-Octets", &dataobj_cc_total_octets, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Input-Octets", &dataobj_cc_input_octets, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Output-Octets", &dataobj_cc_output_octets, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Time", &dataobj_cc_time, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Service-Context-Id", &dataobj_service_context_id, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Multiple-Services-Credit-Control", &dataobj_mscc, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Granted-Service-Unit", &dataobj_gsu, ENOENT));

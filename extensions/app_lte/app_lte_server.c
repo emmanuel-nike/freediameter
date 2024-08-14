@@ -703,6 +703,21 @@ static int app_lte_answer_avp_attributes(struct app_lte_state_machine * app_lte_
 		}
 	}
 
+	/* Set the CC-Time AVP */
+	{
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "CC-Time", &auth_attrib,1, &ret2));
+		if ((ret2 == 0) && (auth_attrib != NULL))
+		{
+			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
+			memset(ans_attrib, 0, sizeof(struct avp_attribute));
+			fd_list_init(&ans_attrib->chain, NULL);
+			ans_attrib->attrib = "CC-Time";
+			ans_attrib->value.i32 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
+			free_attrib(auth_attrib);
+		}
+	}
+
 	/* Set the Rating-Group AVP */
 	{
 		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Rating-Group", &auth_attrib,1, &ret2));
@@ -712,7 +727,22 @@ static int app_lte_answer_avp_attributes(struct app_lte_state_machine * app_lte_
 			memset(ans_attrib, 0, sizeof(struct avp_attribute));
 			fd_list_init(&ans_attrib->chain, NULL);
 			ans_attrib->attrib = "Rating-Group";
-			ans_attrib->value.u64 = atoi(auth_attrib->value);
+			ans_attrib->value.i32 = atoi(auth_attrib->value);
+			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
+			free_attrib(auth_attrib);
+		}
+	}
+
+	/* Set the Validity-Time AVP */
+	{
+		CHECK_FCT(app_lte_get_auth_attribute(&app_lte_sm->attributes, "Validity-Time", &auth_attrib,1, &ret2));
+		if ((ret2 == 0) && (auth_attrib != NULL))
+		{
+			CHECK_MALLOC(ans_attrib = malloc(sizeof(struct avp_attribute)));
+			memset(ans_attrib, 0, sizeof(struct avp_attribute));
+			fd_list_init(&ans_attrib->chain, NULL);
+			ans_attrib->attrib = "Validity-Time";
+			ans_attrib->value.i32 = atoi(auth_attrib->value);
 			fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 			free_attrib(auth_attrib);
 		}
@@ -1123,43 +1153,6 @@ char * app_lte_attribute_operator(char * op, int * toadd, boolean *isrule)
 	return attribute_op;
 }
 
-int app_lte_answer_set_attribute_valueA(union avp_value *A, int *tofree, enum dict_avp_basetype datatype, union avp_value * rval)
-{
-	TRACE_ENTRY("%p %p %d %p",A,tofree,datatype,rval);
-	if (datatype == AVP_TYPE_OCTETSTRING)
-	{
-		CHECK_MALLOC(rval->os.data=malloc(A->os.len));
-		memcpy(rval->os.data,A->os.data,A->os.len);
-		rval->os.len = A->os.len;
-		*tofree = 1;
-	}
-	else
-	{
-		*rval = *A;
-	}
-	return 0;
-}
-
-int app_lte_answer_set_attribute_valueB(char * B, int *tofree, enum dict_avp_basetype datatype, union avp_value * rval)
-{
-	TRACE_ENTRY("%p %p %d %p",B,tofree,datatype,rval);
-	if (datatype == AVP_TYPE_OCTETSTRING)
-	{
-		CHECK_MALLOC(rval->os.data=malloc(strlen(B)));
-		memcpy(rval->os.data,B,strlen(B));
-		rval->os.len = strlen(B);
-
-		*tofree = 1;
-	}
-	else
-	{
-
-		*rval = app_lte_get_num(B, datatype);
-	}
-
-	return 0;
-}
-
 static int app_lte_attribute_limits(char * attrib, int * max, int *ret)
 {
 	TRACE_ENTRY("%p %p %p",attrib,max,ret);
@@ -1303,17 +1296,6 @@ static int app_lte_answer_authorization_attributes(struct app_lte_state_machine 
 	return 0;
 }
 
-
-static int app_lte_policy_decision(struct app_lte_state_machine * app_lte_sm, struct app_lte_eap_interface *eap_i)
-{
-	TRACE_ENTRY("%p %p",app_lte_sm,eap_i);
-
-	// app_lte_sm->result_code = 4001; /* DIAMETER_AUTHENTICATION_REJECTED 4001 */
-	// app_lte_sm->authFailure = TRUE;
-	// TRACE_DEBUG(FULL+1,"%s Auth failure: Authentication Rejected ",APP_LTE_EXTENSION);
-	// return 0;
-}
-
 static int app_lte_add_avps(struct app_lte_state_machine * app_lte_sm, struct msg * ans, struct msg * req)
 {
 	TRACE_ENTRY("%p %p %p",app_lte_sm,ans,req);
@@ -1403,8 +1385,8 @@ static int app_lte_add_authorization_avps(struct app_lte_state_machine * app_lte
 		//struct avp * src = NULL;
 		struct avp * group1 = NULL;
 		struct avp * group2 = NULL;
-		struct avp_hdr * hdr = NULL;
-		union avp_value val, val2;
+		//struct avp_hdr * hdr = NULL;
+		//union avp_value val, val2;
 
 		CHECK_FCT( fd_msg_avp_new ( dataobj_mscc, 0, &group1 ) );
 
@@ -1440,6 +1422,16 @@ static int app_lte_add_authorization_avps(struct app_lte_state_machine * app_lte
 			free_ans_attrib(ans_attrib);
 		}
 
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"CC-Time",&ans_attrib,1,&ret));
+		if ((ret == 0) && (ans_attrib != NULL))
+		{
+			CHECK_FCT(fd_msg_avp_new(dataobj_cc_time, 0, &avp));
+			avp_val.i32 = ans_attrib->value.i32;
+			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
+			CHECK_FCT( fd_msg_avp_add( group2, MSG_BRW_LAST_CHILD, avp ) );
+			free_ans_attrib(ans_attrib);
+		}
+
 		CHECK_FCT( fd_msg_avp_add( group1, MSG_BRW_LAST_CHILD, group2 ) );
 
 		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Rating-Group",&ans_attrib,1,&ret));
@@ -1453,6 +1445,16 @@ static int app_lte_add_authorization_avps(struct app_lte_state_machine * app_lte
 		}
 
 		CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, group1 ) );
+
+		CHECK_FCT(app_lte_get_ans_attribute(&app_lte_sm->ans_attributes,"Validity-Time",&ans_attrib,1,&ret));
+		if ((ret == 0) && (ans_attrib != NULL))
+		{
+			CHECK_FCT(fd_msg_avp_new(dataobj_validity_time, 0, &avp));
+			avp_val.i32 = ans_attrib->value.i32;
+			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
+			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp) );
+			free_ans_attrib(ans_attrib);
+		}
 	}
 
 	return 0;
@@ -1506,33 +1508,6 @@ static int app_lte_send(struct msg ** rmsg)
 {
 	TRACE_ENTRY("%p",rmsg);
 	CHECK_FCT( fd_msg_send( rmsg, NULL, NULL));
-	return 0;
-}
-
-static int app_lte_add_eap_success_avps(struct app_lte_state_machine * app_lte_sm, struct msg * ans, struct app_lte_eap_interface *eap_i)
-{
-	TRACE_ENTRY("%p %p %p",app_lte_sm,ans,eap_i);
-	struct avp * avp;
-	union avp_value avp_val;
-	int ret;
-
-	/* EAP-Key-Name AVP */
-	struct avp_attribute * avp_attrib = NULL;
-
-	CHECK_FCT(app_lte_get_avp_attribute(&app_lte_sm->req_attributes,"EAP-Key-Name",&avp_attrib,1,&ret))
-	if ((avp_attrib != NULL) && (ret != 1))
-	{
-		if (avp_attrib->value.os.len == 0)
-		{
-			CHECK_FCT(fd_msg_avp_new(dataobj_eap_key_name, 0, &avp));
-			avp_val.os.data = NULL;//
-			avp_val.os.len = 0;//
-			CHECK_FCT(fd_msg_avp_setvalue(avp, &avp_val));
-			CHECK_FCT( fd_msg_avp_add( ans, MSG_BRW_LAST_CHILD, avp ) );
-			free_avp_attrib(avp_attrib);
-		}
-	}
-
 	return 0;
 }
 
@@ -1656,7 +1631,7 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 				}
 				else
 				{
-					app_lte_sm->state = APP_LTE_DIAMETER_EAP_ANSWER;
+					app_lte_sm->state = APP_LTE_AUTH_ANSWER;
 				}
 				break;
 
@@ -1672,22 +1647,11 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 				}
 				else
 				{
-					app_lte_sm->state = APP_LTE_DIAMETER_EAP_ANSWER;
+					app_lte_sm->state = APP_LTE_AUTH_ANSWER;
 				}
 				break;
 
-			case APP_LTE_AUTHORIZATION_VERIFY:
-				app_lte_sm->verify_authorization = TRUE;
-				TRACE_DEBUG(FULL+1,"%sVerify authorization",APP_LTE_EXTENSION)
-				;
-				CHECK_FCT_DO(app_lte_authorize(app_lte_sm),
-						{	TRACE_DEBUG(INFO,"%s Authorization check process failed.",APP_LTE_EXTENSION); goto s_end;})
-				;
-				app_lte_sm->state = APP_LTE_SELECT_DECISION;
-
-				break;
-
-			case APP_LTE_DIAMETER_EAP_ANSWER:
+			case APP_LTE_AUTH_ANSWER:
 				fprintf(stderr, "\nECHO APP_LTE_DIAMETER_EAP_ANSWER ");
 				TRACE_DEBUG(FULL+1,"%screate LTE Answer",APP_LTE_EXTENSION);
 				CHECK_FCT_DO(fd_msg_new_answer_from_req(fd_g_config->cnf_dict, rmsg, 0), goto s_end);
@@ -1739,7 +1703,7 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 				fprintf(stderr, "\nECHO APP_LTE_SEND_SUCCESS ");
 				CHECK_FCT_DO(app_lte_add_user_sessions_avps(app_lte_sm,ans), {	TRACE_DEBUG(INFO,"%s Adding user's session AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
 				CHECK_FCT_DO(app_lte_add_authorization_avps(app_lte_sm, ans), {	TRACE_DEBUG(INFO,"%s Adding Authorization AVPs failed.",APP_LTE_EXTENSION); goto s_end;});
-				CHECK_FCT_DO( app_lte_add_result_code(app_lte_sm, ans, sess),{TRACE_DEBUG(INFO,"%s Adding Result-Code AVP failed.",APP_LTE_EXTENSION); goto s_end;});
+				CHECK_FCT_DO(app_lte_add_result_code(app_lte_sm, ans, sess), {	TRACE_DEBUG(INFO,"%s Adding Result-Code AVP failed.",APP_LTE_EXTENSION); goto s_end;});
 				
 				LOG_N("%s Auth Success: %.*s",APP_LTE_EXTENSION, app_lte_sm->lte_sm.user.useridLength, app_lte_sm->lte_sm.user.userid);
 				
