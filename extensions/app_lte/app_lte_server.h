@@ -81,7 +81,7 @@ struct app_lte_state_machine
 	struct lte_state_machine lte_sm; /* EAP State Machine */
 	auth_request auth_request_val; /*the Request Type of Auth-Request-Type AVP*/
 	cc_request cc_request_type; /*The CC Request Type AVP*/
-	int cc_request_num;
+	u32 cc_request_num; /*The CC-Request-Num AVP*/
 	boolean verify_authorization; /* Set to TRUE at the authorization state. Parameter used to indicate that authorization is performed.*/
 	boolean authSuccess; // Set to TRUE if client authenticated and authorized
 	boolean authFailure; //set to TRUE if client is not authenticated

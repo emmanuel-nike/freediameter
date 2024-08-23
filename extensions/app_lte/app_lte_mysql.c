@@ -154,7 +154,7 @@ int app_lte_authentication_get_attribs(struct lte_subscriber *user, struct fd_li
 int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_list *attribute_list)
 {
 	TRACE_ENTRY("%p %p", user, attribute_list);
-	fprintf(stderr, "\nECHO MYSQL_AUTHORIZING %s", user->userid);
+	fprintf(stderr, "\nMYSQL_AUTHORIZING %s", user->userid);
 
 	if (db_conn == NULL)
 	{
@@ -207,7 +207,6 @@ int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_lis
 	mysql_thread_end();
 	free(query);
 	query = NULL;
-	fprintf(stderr, "\nECHO MYSQL_AUTHORIZATION DONE");
 	return 0;
 }
 

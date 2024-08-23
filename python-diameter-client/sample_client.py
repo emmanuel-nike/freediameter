@@ -42,7 +42,11 @@ def send_req(client):
     cer_avps.append(encodeAVP('CC-Request-Number', 1)) #Initial Request
     cer_avps.append(encodeAVP('Subscription-Id', [
         encodeAVP('Subscription-Id-Type', DI_SUBSCRIPTION_ID_TYPE_END_USER_E164),
-        encodeAVP('Subscription-Id-Data', '2342600064592')
+        encodeAVP('Subscription-Id-Data', '2342601212997')
+    ]))
+    cer_avps.append(encodeAVP('Subscription-Id', [
+        encodeAVP('Subscription-Id-Type', DI_SUBSCRIPTION_ID_TYPE_END_USER_IMSI),
+        encodeAVP('Subscription-Id-Data', '45677892342601212997')
     ]))
     cer_avps.append(encodeAVP('Multiple-Services-Indicator', DI_MULTIPLE_SERVICES_INDICATOR_MULTIPLE_SERVICES_SUPPORTED))
     cer_avps.append(encodeAVP('Multiple-Services-Credit-Control', [

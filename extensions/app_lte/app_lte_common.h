@@ -132,4 +132,34 @@ extern struct dict_object *dataobj_cc_time;
 extern struct dict_object *dataobj_rating_group;
 extern struct dict_object *dataobj_validity_time;
 
+/* Type of object */
+enum msg_objtype {
+	MSG_MSG = 1, 
+	MSG_AVP
+};
+
+struct msg_avp_chain {
+	struct fd_list		chaining;	/* Chaining information at this level. */
+	struct fd_list		children;	/* sentinel for the children of this object */
+	enum msg_objtype 	type;		/* Type of this object, _MSG_MSG or _MSG_AVP */
+};
+
+/* The following structure represents an AVP instance. */
+struct avp {
+	struct msg_avp_chain	 avp_chain;		/* Chaining information of this AVP */
+	int			 avp_eyec;		/* Must be equal to MSG_AVP_EYEC */
+	struct dict_object	*avp_model;		/* If not NULL, pointer to the dictionary object of this avp */
+	struct {
+		avp_code_t	 mnf_code;		
+		vendor_id_t	 mnf_vendor;		
+	}  			 avp_model_not_found;	/* When model resolution has failed, store a copy of the data here to avoid searching again */
+	struct avp_hdr		 avp_public;		/* AVP data that can be managed by other modules */
+	
+	uint8_t			*avp_source;		/* If the message was parsed from a buffer, pointer to the AVP data start in the buffer. */
+	uint8_t			*avp_rawdata;		/* when the data can not be interpreted, the raw data is copied here. The header is not part of it. */
+	size_t			 avp_rawlen;		/* The length of the raw buffer. */
+	union avp_value		 avp_storage;		/* To avoid many alloc/free, store the integer values here and set avp_public.avp_data to &storage */
+	int			 avp_mustfreeos;	/* 1 if an octetstring is malloc'd in avp_storage and must be freed. */
+};
+
 #endif /* APP_LTE_COMMON_H_ */

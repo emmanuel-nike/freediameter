@@ -38,7 +38,7 @@
 #ifndef APP_LTE_SUBSCRIBER_H_
 #define APP_LTE_SUBSCRIBER_H_
 
-#define MAXMETHODS 8 /*Maximum number of allowed methods */
+#define MAXSUBS 2 /*Maximum number of allowed methods */
 
 #define MAXPROPOSEDMETHODS 8 /*Maximum number of allowed proposed methods */
 
@@ -48,23 +48,21 @@
 struct lte_subscriber
 {
 	int id;				/*user's identifier*/
+
 	u8 *userid;			/*user's identity*/
 	u16 useridLength;	/*User's identity length*/
+
 	u8 *password;		/*user's password*/
 	u16 passwordLength; /*Length of password*/
 
 	int methodId; /*Current method Id*/
-	// struct eap_method
-	// {
-	// 	u32 vendor;
-	// 	eap_type method;
-	// } methods[MAXMETHODS]; /*used method for authentication*/
+	struct subscription_id
+	{
+		u8* data;		/*User's imsi*/
+		u16 dataLength; /*User's imsi length*/
+		u32 type;
+	} ids[MAXSUBS]; /*used method for authentication*/
 
-	// struct proposed_eap_method
-	// {
-	// 	u32 vendor;
-	// 	eap_type method;
-	// } proposedmethods[MAXPROPOSEDMETHODS]; /* methods proposed throw NAK response or EXPANDED NAK*/
 	int pmethods; /*Number of accepted methods from peer's proposed methods*/
 
 	// eap_type proposed_eap_method; /* Proposed EAP Method*/
