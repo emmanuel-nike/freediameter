@@ -38,8 +38,8 @@ def send_req(client):
     cer_avps.append(encodeAVP('Vendor-Id', diameter_base.standard_avp_values['Vendor-Id']))
     cer_avps.append(encodeAVP('Auth-Application-Id', DIAMETER_APPLICATION_CREDIT_CONTROL))
     cer_avps.append(encodeAVP('Service-Context-Id', '32252@3gpp.org'))
-    cer_avps.append(encodeAVP('CC-Request-Type', DI_CC_REQUEST_TYPE_INITIAL_REQUEST)) #Initial Request
-    cer_avps.append(encodeAVP('CC-Request-Number', 1)) #Initial Request
+    cer_avps.append(encodeAVP('CC-Request-Type', DI_CC_REQUEST_TYPE_TERMINATION_REQUEST)) #Initial Request
+    cer_avps.append(encodeAVP('CC-Request-Number', 3)) #Initial Request
     cer_avps.append(encodeAVP('Subscription-Id', [
         encodeAVP('Subscription-Id-Type', DI_SUBSCRIPTION_ID_TYPE_END_USER_E164),
         encodeAVP('Subscription-Id-Data', '2342601212997')
@@ -50,6 +50,12 @@ def send_req(client):
     ]))
     cer_avps.append(encodeAVP('Multiple-Services-Indicator', DI_MULTIPLE_SERVICES_INDICATOR_MULTIPLE_SERVICES_SUPPORTED))
     cer_avps.append(encodeAVP('Multiple-Services-Credit-Control', [
+        encodeAVP('Used-Service-Unit', [
+            encodeAVP('CC-Time', 200),
+            encodeAVP('CC-Total-Octets', 4096),
+            encodeAVP('CC-Input-Octets', 2048),
+            encodeAVP('CC-Output-Octets', 2048),
+        ]),
         encodeAVP('Rating-Group', 100),
     ]))
 

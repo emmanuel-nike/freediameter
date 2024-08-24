@@ -9,6 +9,7 @@
         "libdiameap.h": "c",
         "diameap_defs.h": "c",
         "app_lte_defs.h": "c",
-        "app_lte_mysql.h": "c"
+        "app_lte_mysql.h": "c",
+        "app_lte_subscriber.h": "c"
     }
 }

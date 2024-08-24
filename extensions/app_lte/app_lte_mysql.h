@@ -42,6 +42,8 @@ MYSQL *db_conn;
 
 int get_lte_subscriber(struct lte_subscriber *user, char *username);
 
+int update_lte_subscriber_acct(struct lte_subscriber_acct *user_acct);
+
 int app_lte_mysql_connect();
 
 int app_lte_mysql_reconnect();

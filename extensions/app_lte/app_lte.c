@@ -100,6 +100,7 @@ struct dict_object *dataobj_tunneling = NULL;
 struct dict_object *dataobj_subscription_id = NULL;
 struct dict_object *dataobj_subscription_id_data = NULL;
 struct dict_object *dataobj_subscription_id_type = NULL;
+struct dict_object *dataobj_used_service_unit = NULL;
 struct dict_object *dataobj_mscc = NULL;
 struct dict_object *dataobj_gsu = NULL;
 struct dict_object *dataobj_cc_total_octets = NULL;
@@ -159,6 +160,7 @@ static int app_lte_init_obj(void)
 	// CHECK_FCT( fd_dict_search( fd_g_config->cnf_dict, DICT_VENDOR, VENDOR_OF_APPLICATION, &dataobj_lte_app, &dataobj_lte_ven, ENOENT));
 	
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Auth-Application-Id", &dataobj_auth_application_id, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Calling-Station-Id", &dataobj_calling_station_id, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Request-Type", &dataobj_cc_request_type, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Request-Number", &dataobj_cc_request_num, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "CC-Total-Octets", &dataobj_cc_total_octets, ENOENT));
@@ -179,6 +181,7 @@ static int app_lte_init_obj(void)
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Subscription-Id", &dataobj_subscription_id, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Subscription-Id-Data", &dataobj_subscription_id_data, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Subscription-Id-Type", &dataobj_subscription_id_type, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Used-Service-Unit", &dataobj_used_service_unit, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Validity-Time", &dataobj_validity_time, ENOENT));
 
 	// CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "User-Name", &dataobj_user_name, ENOENT));

@@ -79,3 +79,25 @@ CREATE TABLE IF NOT EXISTS `lte_subscriber_grp` (
   `grp` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers`
+--
+
+CREATE TABLE IF NOT EXISTS `lte_subscriber_acct` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `imsi` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `total_time` int(11) NOT NULL DEFAULT '0',
+  `total_octets` bigint(11) NOT NULL DEFAULT '0',
+  `input_octets` bigint(11) NOT NULL DEFAULT '0',
+  `output_octets` bigint(11) NOT NULL DEFAULT '0',
+  `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_time` TIMESTAMP NULL,
+  `cc_request_type` smallint(11) NOT NULL DEFAULT '1',
+  `cc_request_num` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+);

@@ -35,9 +35,58 @@
 
 static pthread_mutex_t db_cs_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+int update_lte_subscriber_acct(struct lte_subscriber_acct *user_acct) 
+{
+	fprintf(stderr, "\nMYSQL_UPDATING_USER_ACCT %s", user_acct->userid);
+	TRACE_ENTRY("%p %p", user_acct->userid, user_acct->userimsi);
+	if (db_conn == NULL)
+	{
+		TRACE_DEBUG(INFO, "%sNot connected to the MySQL Database server.", APP_LTE_EXTENSION);
+		return EINVAL;
+	}
+	mysql_thread_init();
+
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+	char *query;
+	CHECK_MALLOC(query = (char *)malloc(sizeof(char) * 300));
+
+	if(user_acct->cc_request_type == INITIAL_REQUEST) {
+		sprintf(query, "INSERT INTO lte_subscriber_acct(session_id,username,imsi) values ('%s', '%s', '%s')", user_acct->sessionId, user_acct->userid, user_acct->userimsi);
+	}
+	else if(user_acct->cc_request_type == UPDATE_REQUEST) {
+		sprintf(query, "UPDATE lte_subscriber_acct SET total_time = total_time + %d, total_octets = total_octets + %d, input_octets = input_octets + %d, output_octets = output_octets + %d, cc_request_type = %d, cc_request_num = %d WHERE session_id = '%s' AND username = '%s'", user_acct->ccTime, user_acct->totalOctets, user_acct->inputOctets, user_acct->outputOctets, user_acct->cc_request_type, user_acct->cc_request_num, user_acct->sessionId, user_acct->userid);
+	}
+	else if(user_acct->cc_request_type == TERMINATION_REQUEST) {
+		sprintf(query, "UPDATE lte_subscriber_acct SET total_time = total_time + %d, total_octets = total_octets + %d, input_octets = input_octets + %d, output_octets = output_octets + %d, cc_request_type = %d, cc_request_num = %d, end_time = current_timestamp WHERE session_id = '%s' AND username = '%s'", user_acct->ccTime, user_acct->totalOctets, user_acct->inputOctets, user_acct->outputOctets, user_acct->cc_request_type, user_acct->cc_request_num, user_acct->sessionId, user_acct->userid);
+	} else {
+		TRACE_DEBUG(INFO, "%sRequest type unknown.", APP_LTE_EXTENSION);
+		return EINVAL;
+	}
+	fprintf(stderr, "\n%s", query);
+	if (mysql_query(db_conn, query))
+	{
+		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
+		TRACE_DEBUG(INFO, "%sQuery execution fail. %s", APP_LTE_EXTENSION, mysql_error(db_conn));
+		mysql_thread_end();
+		free(query);
+		query = NULL;
+		return EINVAL;
+	}
+
+	res = mysql_store_result(db_conn);
+
+	CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
+	mysql_free_result(res);
+	mysql_thread_end();
+	free(query);
+	query = NULL;
+	return 0;
+}
+
 int get_lte_subscriber(struct lte_subscriber *user, char *username)
 {
-	fprintf(stderr, "\nECHO MYSQL_CHECKING_USER %s", username);
+	fprintf(stderr, "\nMYSQL_CHECKING_USER %s", username);
 	TRACE_ENTRY("%p %p", user, username);
 	if (db_conn == NULL)
 	{

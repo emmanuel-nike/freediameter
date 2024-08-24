@@ -46,8 +46,7 @@ int app_lte_subscriber_get_userid(struct lte_subscriber *user, u8 *userid)
 	return 0;
 }
 
-int app_lte_subscriber_set_userid(struct lte_subscriber *user, u8 *userid,
-								  u16 useridLength)
+int app_lte_subscriber_set_userid(struct lte_subscriber *user, u8 *userid, u16 useridLength)
 {
 	TRACE_ENTRY("%p %p %hu", user, userid, useridLength);
 	if (userid == NULL)
@@ -56,42 +55,5 @@ int app_lte_subscriber_set_userid(struct lte_subscriber *user, u8 *userid,
 		return EINVAL;
 	user->userid = userid;
 	user->useridLength = useridLength;
-	return 0;
-}
-
-int app_lte_subscriber_get_methodid(struct lte_subscriber *user, int *methodid)
-{
-	TRACE_ENTRY("%p %p", user, methodid);
-	if (user->password == NULL)
-		return EINVAL;
-	*methodid = user->methodId;
-	return 0;
-}
-
-int app_lte_subscriber_set_methodid(struct lte_subscriber *user, int methodId)
-{
-	TRACE_ENTRY("%p %d", user, methodId);
-	if (user->password == NULL)
-		return EINVAL;
-	if (methodId < 0)
-		return EINVAL;
-	user->methodId = methodId;
-	return 0;
-}
-
-boolean app_lte_subscriber_issuccess(struct lte_subscriber *user)
-{
-	TRACE_ENTRY("%p", user);
-	if (user->password == NULL)
-		return FALSE;
-	return user->success;
-}
-
-int app_lte_subscriber_set_success(struct lte_subscriber *user)
-{
-	TRACE_ENTRY("%p", user);
-	if (user->password == NULL)
-		return EINVAL;
-	user->success = TRUE;
 	return 0;
 }

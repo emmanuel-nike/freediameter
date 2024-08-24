@@ -123,6 +123,7 @@ extern struct dict_object *dataobj_tunneling;
 extern struct dict_object *dataobj_subscription_id;
 extern struct dict_object *dataobj_subscription_id_data;
 extern struct dict_object *dataobj_subscription_id_type;
+extern struct dict_object *dataobj_used_service_unit;
 extern struct dict_object *dataobj_mscc;
 extern struct dict_object *dataobj_gsu;
 extern struct dict_object *dataobj_cc_total_octets;

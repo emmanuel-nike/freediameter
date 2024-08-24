@@ -55,41 +55,39 @@ struct lte_subscriber
 	u8 *password;		/*user's password*/
 	u16 passwordLength; /*Length of password*/
 
-	int methodId; /*Current method Id*/
 	struct subscription_id
 	{
-		u8* data;		/*User's imsi*/
-		u16 dataLength; /*User's imsi length*/
+		u8* data;	
+		u16 dataLength;
 		u32 type;
-	} ids[MAXSUBS]; /*used method for authentication*/
+	} ids[MAXSUBS];
+};
 
-	int pmethods; /*Number of accepted methods from peer's proposed methods*/
+/*EAP User Accounting structure */
+struct lte_subscriber_acct
+{
+	u8 *sessionId;			/*user's identity*/
+	u16 sessionIdLength;	/*User's identity length*/
 
-	// eap_type proposed_eap_method; /* Proposed EAP Method*/
-	u32 proposed_eap_method_vendor;
-	boolean success; /* Set to TRUE if User is authenticated successfully */
+	u8 *userid;			/*user's identity*/
+	u16 useridLength;	/*User's identity length*/
+
+	u8 *userimsi;		/*user's imsi*/
+	u16 userimsiLength;	/*User's imsi length*/
+
+	u32 ccTime;
+	u64 totalOctets;
+	u64 inputOctets;
+	u64 outputOctets;
+
+	int cc_request_type;
+	int cc_request_num;
 };
 
 boolean check_user_identity;
 
-int app_lte_subscriber_get_password(struct lte_subscriber *user, u8 *password, u16 *length);
-
 int app_lte_subscriber_get_userid(struct lte_subscriber *user, u8 *userid);
 
-int app_lte_subscriber_set_password(struct lte_subscriber *user, u8 *password, u16 Length);
-
 int app_lte_subscriber_set_userid(struct lte_subscriber *user, u8 *userid, u16 Length);
-
-int app_lte_subscriber_get_methodid(struct lte_subscriber *user, int *methodId);
-
-int app_lte_subscriber_set_methodid(struct lte_subscriber *user, int methodId);
-
-boolean diamlte_subscriber_issuccess(struct lte_subscriber *user);
-
-int diamlte_subscriber_set_success(struct lte_subscriber *user);
-
-// int diamlte_subscriber_get_eap_method(struct lte_subscriber *user, int id, struct eap_method *eapmethod);
-
-// int diamlte_subscriber_set_eap_method(struct lte_subscriber *user, int id, struct eap_method *method);
 
 #endif /* APP_LTE_SUBSCRIBER_H_ */

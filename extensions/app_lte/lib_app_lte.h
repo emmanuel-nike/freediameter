@@ -43,12 +43,16 @@
 #define APP_LTE_EXTENSION "[App LTE extension] "
 
 #include "app_lte_defs.h"
-// #include "diameap_eappacket.h"
 #include "app_lte_subscriber.h"
 #include "app_lte_mysql.h"
 
 #include <math.h>
 #include <dlfcn.h>
+
+typedef enum
+{
+	INITIAL_REQUEST = 1, UPDATE_REQUEST = 2, TERMINATION_REQUEST = 3, EVENT_REQUEST = 4
+} cc_request;
 
 /* authentication and authorization attributes  */
 
@@ -76,37 +80,16 @@ struct lte_state_machine
 	/*Local state Machine Variables*/
 
 	/* Long-Term (Maintained between Packets) */
-	u32 currentVendor;
 	int currentId;
 	int lastId;
-	void * methodData;
-	struct plugin *selectedMethod;
-	u8 NAKproposedMethods[251];
-
+	
 	struct lte_subscriber user;
+	struct lte_subscriber_acct userAcct;
+	
 
 	/* Short-Term (Not Maintained between exchanged Diameter EAP messages)*/
 	boolean rxResp;
 	int respId;
-	int respVendorMethod;
-	u32 respVendor;
-	enum
-	{
-		EAP_INITIALIZE,
-		EAP_PICK_UP_METHOD,
-		EAP_IDLE,
-		EAP_RECEIVED,
-		EAP_SEND_REQUEST,
-		EAP_INTEGRITY_CHECK,
-		EAP_METHOD_REQUEST,
-		EAP_METHOD_RESPONSE,
-		EAP_PROPOSE_METHOD,
-		EAP_NAK,
-		EAP_SELECT_ACTION,
-		EAP_END,
-		EAP_DISCARD
-	} eap_state;
-
 };
 
 

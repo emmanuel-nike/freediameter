@@ -45,28 +45,17 @@ struct sess_state
 {
 	int invalid_packets; /* Number of invalid EAP Packet received*/
 
-	//eap_type currentMethod;
-	u32 currentVendor;
 	int currentId;
 	int lastId;
-	void * methodData;
-
-	u8 NAKproposedMethods[251];
-
-	//eap_method_state methodState;
 
 	struct lte_subscriber user;
+	struct lte_subscriber_acct user_acct;
 };
 
 typedef enum
 {
 	AUTHENTICATE_ONLY = 1, AUTHORIZE_ONLY = 2, AUTHORIZE_AUTHENTICATE = 3
 } auth_request;
-
-typedef enum
-{
-	INITIAL_REQUEST = 1, UPDATE_REQUEST = 2, TERMINATION_REQUEST = 3, EVENT_REQUEST = 4
-} cc_request;
 
 struct app_lte_state_machine
 {
