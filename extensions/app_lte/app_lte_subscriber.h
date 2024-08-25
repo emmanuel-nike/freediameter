@@ -61,6 +61,11 @@ struct lte_subscriber
 		u16 dataLength;
 		u32 type;
 	} ids[MAXSUBS];
+
+	u32 usedCcTime;
+	u64 usedTotalOctets;
+	u64 usedInputOctets;
+	u64 usedOutputOctets;
 };
 
 /*EAP User Accounting structure */

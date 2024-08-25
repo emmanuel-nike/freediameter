@@ -63,7 +63,9 @@ int update_lte_subscriber_acct(struct lte_subscriber_acct *user_acct)
 		TRACE_DEBUG(INFO, "%sRequest type unknown.", APP_LTE_EXTENSION);
 		return EINVAL;
 	}
-	fprintf(stderr, "\n%s", query);
+	
+	//fprintf(stderr, "\n%s", query);
+	
 	if (mysql_query(db_conn, query))
 	{
 		CHECK_POSIX(pthread_mutex_unlock(&db_cs_mutex));
@@ -98,9 +100,11 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	char *query;
-	CHECK_MALLOC(query = (char *)malloc(sizeof(char) * 255));
+	CHECK_MALLOC(query = (char *)malloc(sizeof(char) * 600));
 
-	sprintf(query, "SELECT id,username FROM lte_subscribers WHERE username='%s' and active='Y' ", username);
+	sprintf(query, "SELECT ls.id, ls.username, COALESCE(lsa.total_time, 0) AS total_time, COALESCE(lsa.total_octets, 0) AS total_octets, COALESCE(lsa.input_octets, 0) AS input_octets, COALESCE(lsa.output_octets, 0) AS output_octets FROM lte_subscribers ls LEFT JOIN (SELECT username, SUM(lsa.total_time) AS total_time, SUM(lsa.total_octets) AS total_octets, SUM(lsa.input_octets) AS input_octets, SUM(lsa.output_octets) AS output_octets FROM lte_subscriber_acct lsa GROUP BY lsa.username) lsa ON lsa.username = ls.username WHERE ls.username='%s' AND ls.active='Y';", username);
+
+	//fprintf(stderr, "\n%s", query);
 
 	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));
 
@@ -121,11 +125,16 @@ int get_lte_subscriber(struct lte_subscriber *user, char *username)
 
 	if ((row = mysql_fetch_row(res)) != NULL)
 	{
-
+		char *endptr;
 		user->id = atoi(row[0]);
 		CHECK_MALLOC(user->userid = malloc(strlen(row[1]) + 1));
 		memcpy(user->userid, row[1], strlen(row[1]) + 1);
 		user->useridLength = strlen(row[1]);
+
+		user->usedCcTime = strtoull(row[2], &endptr, 0);
+		user->usedTotalOctets = strtoull(row[3], &endptr, 0);
+		user->usedInputOctets = strtoull(row[4], &endptr, 0);
+		user->usedOutputOctets = strtoull(row[5], &endptr, 0);
 
 		mysql_free_result(res);
 		mysql_thread_end();
@@ -221,7 +230,7 @@ int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_lis
 
 	sprintf(
 		query,
-		"SELECT `attribute` , `op` , `value` FROM `lte_authz` WHERE `grp` IN ( SELECT `grp` FROM `lte_subscriber_grp` WHERE `lte_subscriber` = %d )",
+		"SELECT `attribute`, `op`, `value` FROM `lte_authz` WHERE `grp` IN ( SELECT `grp` FROM `lte_subscriber_grp` WHERE `lte_subscriber` = %d )",
 		user->id);
 
 	CHECK_POSIX(pthread_mutex_lock(&db_cs_mutex));

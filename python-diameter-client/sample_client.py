@@ -39,7 +39,7 @@ def send_req(client):
     cer_avps.append(encodeAVP('Auth-Application-Id', DIAMETER_APPLICATION_CREDIT_CONTROL))
     cer_avps.append(encodeAVP('Service-Context-Id', '32252@3gpp.org'))
     cer_avps.append(encodeAVP('CC-Request-Type', DI_CC_REQUEST_TYPE_TERMINATION_REQUEST)) #Initial Request
-    cer_avps.append(encodeAVP('CC-Request-Number', 3)) #Initial Request
+    cer_avps.append(encodeAVP('CC-Request-Number', 4)) #Initial Request
     cer_avps.append(encodeAVP('Subscription-Id', [
         encodeAVP('Subscription-Id-Type', DI_SUBSCRIPTION_ID_TYPE_END_USER_E164),
         encodeAVP('Subscription-Id-Data', '2342601212997')
