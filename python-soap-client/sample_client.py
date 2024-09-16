@@ -15,8 +15,10 @@
 
 import requests
 import xmltodict
+import base64
 
-host = '10.200.20.38'
+#host = '10.200.17.43'
+host = '10.200.17.44'
 username = 'WISPGATE'
 password = 'Sw1ft@321'
 
@@ -24,21 +26,31 @@ imsi = '621260010212956' #'863456789102228'
 msisdn = '2342601212956@msisdn'
 isdn = '2342601212956'
 
+def encode_auth():
+    string = username+':'+password
+    base64_bytes = base64.b64encode(string.encode("utf-8"))
+    return base64_bytes.decode("utf-8")
+
 def send_request(req_data):
     req_headers = {
         'Content-Type': "text/xml; charset=utf-8", 
         'Content-Length': "%d" % len(req_data), 
         'SOAPAction': 'Notification', 
         #'User-Agent': 'Jakarta Commons-HttpClient/3.1', 
-        'Host': '{}:8001'.format(host)
+        'Host': '{}:8080'.format(host),
     }
-    response = requests.post("http://{}:8001".format(host), data=req_data, headers=req_headers, allow_redirects=False, timeout=100)
+    #print(req_headers)
+    
+    #response = requests.get("http://{}:8080/axis/services/AdminService?wsdl".format(host), data=req_data, headers=req_headers, allow_redirects=False, timeout=100)
+    response = requests.post("http://{}:8001/axis/services/ScfPccSoapServiceEndpointPort".format(host), data=req_data, headers=req_headers, allow_redirects=False, timeout=100)
     
     if response.status_code == 200:
+        print(response.text)
         parsed = xmltodict.parse(response.text)
         return {'response': parsed['SOAP-ENV:Envelope']['SOAP-ENV:Body'], 'status': response.status_code}
     else: 
         print(response.headers, response.status_code)
+        print(response.text)
     return {'response': response.text, 'status': response.status_code}
 
 
@@ -65,30 +77,48 @@ mod_gprs_data = """<?xml version="1.0"?><soapenv:Envelope xmlns:soapenv="http://
 <APNTPLID>25</APNTPLID><DEFAULTCFGFLAG>TRUE</DEFAULTCFGFLAG><EPS_QOSTPLID>0</EPS_QOSTPLID><PDPTYPE>IPV4</PDPTYPE>
 <ADDIND>DYNAMIC</ADDIND><VPLMN>TRUE</VPLMN><CHARGE>PREPAID</CHARGE></MOD_OPTGPRS></soapenv:Body></soapenv:Envelope>""".format(imsi)
 
-#ADD SUB: HLRSN =2, IMSI="435670998956956", ISDN="9876534345", CARDTYPE=USIM, TS=TS11&TS21;
-#RMV SUB: ISDN="13623456789", RMVKI=TRUE;
-#MOD OPTGPRS: IMSI="621260010212998", PROV=ADDPDPCNTX, APN_TYPE=EPS_APN, APNTPLID=25, DEFAULTCFGFLAG=TRUE, EPS_QOSTPLID=0, PDPTYPE=IPV4, ADDIND=DYNAMIC, VPLMN=TRUE, CHARGE=PREPAID;
+add_psub_data_old = """<?xml version="1.0"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Body><Notification><get><USRIDENTIFIER>{}</USRIDENTIFIER><USRMSISDN>{}</USRMSISDN><USRSTATE>Normal</USRSTATE>
+</get></Notification></soapenv:Body></soapenv:Envelope>""".format(imsi, isdn)
 
-# res = send_request(login_data)
-# if res['status'] == 200:
-#     result = res['response']['LGIResponse']['Result']
-#     if int(result['ResultCode']) == 0:
-#         print(result['ResultDesc'])
-#     else:
-#         print(result)
+add_psub_data = """<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rm="rm:soap">
+<soapenv:Header/><soapenv:Body><rm:ADD_PSUB><USRIDENTIFIER>{}</USRIDENTIFIER><USRMSISDN>{}</USRMSISDN><USRSTATE>1</USRSTATE>
+<USRPAIDTYPE>2147483646</USRPAIDTYPE><USRSTATION>1</USRSTATION><USRCONTACTMETHOD>SMS</USRCONTACTMETHOD></rm:ADD_PSUB></soapenv:Body></soapenv:Envelope>""".format(imsi, isdn)
+
+rmv_psub_data = """<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rm="rm:soap">
+<soapenv:Header/><soapenv:Body><rm:RMV_PSUB><USRIDENTIFIER>{}</USRIDENTIFIER><USRMSISDN>{}</USRMSISDN></rm:RMV_PSUB></soapenv:Body></soapenv:Envelope>""".format(imsi, isdn)
+
+add_psrv_data = """<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rm="rm:soap">
+<soapenv:Header/><soapenv:Body><rm:ADD_PSRV><USRIDENTIFIER>{}</USRIDENTIFIER><SRVNAME>bras_5mbps_all_day</SRVNAME></rm:ADD_PSRV></soapenv:Body></soapenv:Envelope>""".format(imsi, isdn)
+
+
+
+
+res = send_request(login_data)
+if res['status'] == 200:
+    result = res['response']['LGIResponse']['Result']
+    if int(result['ResultCode']) == 0:
+        print(result['ResultDesc'])
+    else:
+        print(result)
 
 # res = send_request(logout_data)
 # if res['status'] == 200:
 #     print(res)
-res = send_request(rem_sub_data)
-if res['status'] == 200:
-    result = res['response']['RMV_SUBResponse']['Result']
-    print(result)
+# res = send_request(rem_sub_data)
+# if res['status'] == 200:
+#     result = res['response']['RMV_SUBResponse']['Result']
+#     print(result)
 
-res = send_request(add_ki_data)
+res = send_request(add_psub_data)
 if res['status'] == 200:
-    result = res['response']['ADD_KIResponse']['Result']
-    print(result)
+    #result = res['response']['ADD_KIResponse']['Result']
+    print(res)
+
+res = send_request(add_psrv_data)
+if res['status'] == 200:
+    #result = res['response']['ADD_KIResponse']['Result']
+    print(res)
 
 # res = send_request(rem_ki_data)
 # if res['status'] == 200:
@@ -99,14 +129,14 @@ if res['status'] == 200:
 #     result = res['response']['CHK_KIResponse']['Result']
 #     print(res)
 
-res = send_request(add_sub_data)
-if res['status'] == 200:
-    result = res['response']['ADD_SUBResponse']['Result']
-    print(result)
+# res = send_request(add_sub_data)
+# if res['status'] == 200:
+#     result = res['response']['ADD_SUBResponse']['Result']
+#     print(result)
 
-res = send_request(mod_gprs_data)
-if res['status'] == 200:
-    result = res['response']['MOD_OPTGPRSResponse']['Result']
-    print(result)
+# res = send_request(mod_gprs_data)
+# if res['status'] == 200:
+#     result = res['response']['MOD_OPTGPRSResponse']['Result']
+#     print(result)
 
 
