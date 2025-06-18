@@ -258,6 +258,7 @@ int app_lte_authorization_get_attribs(struct lte_subscriber *user, struct fd_lis
 		attribute->attrib = strdup(row[0]);
 		attribute->op = strdup(row[1]);
 		attribute->value = strdup(row[2]);
+		//fprintf(stderr, "\nFETCH ATTR %s <> %s", attribute->attrib, attribute->value);
 		fd_list_insert_before(attribute_list, &attribute->chain);
 	}
 

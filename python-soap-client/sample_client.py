@@ -110,12 +110,12 @@ if res['status'] == 200:
 #     result = res['response']['RMV_SUBResponse']['Result']
 #     print(result)
 
-res = send_request(add_psub_data)
-if res['status'] == 200:
-    #result = res['response']['ADD_KIResponse']['Result']
-    print(res)
+# res = send_request(add_psub_data)
+# if res['status'] == 200:
+#     #result = res['response']['ADD_KIResponse']['Result']
+#     print(res)
 
-res = send_request(add_psrv_data)
+res = send_request(rmv_psub_data)
 if res['status'] == 200:
     #result = res['response']['ADD_KIResponse']['Result']
     print(res)

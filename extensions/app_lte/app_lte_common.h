@@ -132,6 +132,11 @@ extern struct dict_object *dataobj_cc_output_octets;
 extern struct dict_object *dataobj_cc_time;
 extern struct dict_object *dataobj_rating_group;
 extern struct dict_object *dataobj_validity_time;
+extern struct dict_object *dataobj_final_unit_indication;
+extern struct dict_object *dataobj_final_unit_action;
+extern struct dict_object *dataobj_redirect_server;
+extern struct dict_object *dataobj_redirect_address_type;
+extern struct dict_object *dataobj_redirect_server_address;
 
 /* Type of object */
 enum msg_objtype {

@@ -109,6 +109,11 @@ struct dict_object *dataobj_cc_output_octets = NULL;
 struct dict_object *dataobj_cc_time = NULL;
 struct dict_object *dataobj_rating_group = NULL;
 struct dict_object *dataobj_validity_time = NULL;
+struct dict_object *dataobj_final_unit_indication = NULL;
+struct dict_object *dataobj_final_unit_action = NULL;
+struct dict_object *dataobj_redirect_server = NULL;
+struct dict_object *dataobj_redirect_address_type = NULL;
+struct dict_object *dataobj_redirect_server_address = NULL;
 
 int app_lte_set_mysql_param(char *user, char *passwd, char *server, char *database)
 {
@@ -183,6 +188,11 @@ static int app_lte_init_obj(void)
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Subscription-Id-Type", &dataobj_subscription_id_type, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Used-Service-Unit", &dataobj_used_service_unit, ENOENT));
 	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Validity-Time", &dataobj_validity_time, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Final-Unit-Indication", &dataobj_final_unit_indication, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Final-Unit-Action", &dataobj_final_unit_action, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Redirect-Server", &dataobj_redirect_server, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Redirect-Address-Type", &dataobj_redirect_address_type, ENOENT));
+	CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "Redirect-Server-Address", &dataobj_redirect_server_address, ENOENT));
 
 	// CHECK_FCT(fd_dict_search(fd_g_config->cnf_dict, DICT_AVP, AVP_BY_NAME, "User-Name", &dataobj_user_name, ENOENT));
 

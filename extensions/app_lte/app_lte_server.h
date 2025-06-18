@@ -75,6 +75,8 @@ struct app_lte_state_machine
 	boolean authSuccess; // Set to TRUE if client authenticated and authorized
 	boolean authFailure; //set to TRUE if client is not authenticated
 	boolean authorized; //set to TRUE if client is authorized
+	boolean shouldRedirect;
+	uint8_t redirectPortal[100]; // Set to value of redirection portal
 	enum
 	{
 		APP_LTE_DISABLED,

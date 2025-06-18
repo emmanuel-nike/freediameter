@@ -373,12 +373,15 @@ def decode_OctetString(data,dlen):
 #0xF0..0xF4   First byte of a 4-byte character encoding
 #Note:0xF5-0xFF cannot occur    
 def decode_UTF8String(data,dlen):
-    fs="!"+str(dlen-8)+"s"
-    dbg="Decoding UTF8 format:",fs
-    logging.info(dbg)
-    ret=struct.unpack(fs,data.decode("hex")[0:dlen-8])[0]
-    utf8=utf8decoder(ret)
-    return utf8[0]
+    try:
+        fs="!"+str(dlen-8)+"s"
+        dbg="Decoding UTF8 format:",fs
+        logging.info(dbg)
+        ret=struct.unpack(fs,data.decode("hex")[0:dlen-8])[0]
+        utf8=utf8decoder(ret)
+        return utf8[0]
+    except:
+        return ''
 
 def decode_Grouped(data):
     dbg="Decoding Grouped:"
@@ -782,16 +785,16 @@ def stripHdr(H,msg):
 # Result: list of undecoded AVPs
 def splitMsgAVPs(msg):
     ret=[]
-    dbg="Incoming avps",msg
-    # logging.debug(dbg)
+    #dbg="Incoming avps",msg
+    #logging.info(dbg)
     while len(msg) != 0:
       slen="00"+msg[10:16]
       mlen=struct.unpack("!I",slen.decode("hex"))[0]
       #Increase to boundary
       plen=calc_padding(mlen)
       (avp,msg)=chop_msg(msg,2*plen)
-      dbg="Single AVP","L",mlen,plen,"D",avp
-      # logging.info(dbg)
+      #dbg="Single AVP","L",mlen,plen,"D",avp
+      #logging.info(dbg)
       ret.append(avp)
     return ret
 
