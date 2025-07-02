@@ -1706,7 +1706,8 @@ static int app_lte_server_callback(struct msg ** rmsg, struct avp * ravp, struct
 
 				if (app_lte_sm->result_code == 1001)
 				{
-					CHECK_FCT_DO( app_lte_add_eap_reissued_payload(ans,req), goto s_end);
+					//CHECK_FCT_DO( app_lte_add_eap_reissued_payload(ans,req), goto s_end);
+					TRACE_DEBUG(INFO, "%sERROR Result code 1001 Occured !!!", APP_LTE_EXTENSION);
 				}
 
 				if (app_lte_sm->result_code == 5004)
