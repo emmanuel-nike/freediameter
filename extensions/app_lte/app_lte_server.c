@@ -1244,14 +1244,14 @@ static int app_lte_answer_authorization_attributes(struct app_lte_state_machine 
 						memset(ans_attrib, 0, sizeof(struct avp_attribute));
 						fd_list_init(&ans_attrib->chain, NULL);
 						ans_attrib->attrib = strdup(auth_attrib->attrib);
-						if (toadd == 1)
-						{
-							app_lte_answer_set_attribute_valueA(&avp_attrib->value, &ans_attrib->tofree, avpdata.avp_basetype, &ans_attrib->value);
-						}
-						else
-						{
-							app_lte_answer_set_attribute_valueB(auth_attrib->value, &ans_attrib->tofree, avpdata.avp_basetype, &ans_attrib->value);
-						}
+						// if (toadd == 1)
+						// {
+						// 	//app_lte_answer_set_attribute_valueA(&avp_attrib->value, &ans_attrib->tofree, avpdata.avp_basetype, &ans_attrib->value);
+						// }
+						// else
+						// {
+						// 	//app_lte_answer_set_attribute_valueB(auth_attrib->value, &ans_attrib->tofree, avpdata.avp_basetype, &ans_attrib->value);
+						// }
 						fd_list_insert_before(&app_lte_sm->ans_attributes, &ans_attrib->chain);
 					}
 					else
